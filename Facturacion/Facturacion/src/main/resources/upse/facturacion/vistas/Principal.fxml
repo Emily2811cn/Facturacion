@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="750.0" style="-fx-background-color: #FAF5F9;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="upse.facturacion.controlador.PrincipalController">
+   <top>
+      <MenuBar BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="%menu.archivo">
+            <items>
+              <MenuItem fx:id="menu_cliente" mnemonicParsing="false" onAction="#acc_menuCliente" text="%menu.item.clientes" />
+              <MenuItem fx:id="menu_producto" mnemonicParsing="false" onAction="#acc_productos" text="%menu.item.productos" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="%menu.proceso">
+            <items>
+              <MenuItem mnemonicParsing="false" text="%menu.item.facturacion" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="%menu.reportes">
+            <items>
+              <MenuItem mnemonicParsing="false" text="%menu.item.about" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </top>
+   <left>
+      <Accordion prefHeight="375.0" prefWidth="120.0" style="-fx-background-color: #660036;" BorderPane.alignment="CENTER">
+        <panes>
+          <TitledPane animated="false" text="%titled.archivo">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #660036;">
+                     <children>
+                        <Button fx:id="btn_clientes" contentDisplay="TOP" layoutX="15.0" layoutY="14.0" mnemonicParsing="false" onAction="#acc_clientes" prefHeight="75.0" prefWidth="85.0" text="%btn.clientes">
+                           <graphic>
+                              <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../recursos/cliente.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <font>
+                              <Font name="System Bold" size="11.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="btn_productos" contentDisplay="TOP" layoutX="15.0" layoutY="105.0" mnemonicParsing="false" onAction="#acc_productos" prefHeight="75.0" prefWidth="85.0" text="%btn.productos">
+                           <graphic>
+                              <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../recursos/product.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <font>
+                              <Font name="System Bold" size="11.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </TitledPane>
+          <TitledPane animated="false" text="%titled.proceso">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #660036;" />
+            </content>
+          </TitledPane>
+          <TitledPane animated="false" text="%titled.reportes">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #660036;" />
+            </content>
+          </TitledPane>
+        </panes>
+      </Accordion>
+   </left>
+   <bottom>
+      <Pane prefHeight="35.0" prefWidth="600.0" style="-fx-background-color: #660036;" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="14.0" layoutY="9.0" text="%lbl.footer.usuario" textFill="WHITE">
+               <font>
+                  <Font name="System Bold Italic" size="12.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbl_usuario" layoutX="80.0" layoutY="9.0" text="Miguel Montoya" textFill="WHITE" />
+         </children>
+      </Pane>
+   </bottom>
+   <center>
+      <StackPane fx:id="dataPane" prefHeight="150.0" prefWidth="200.0" style="-fx-background-color: #DEDEDE;" BorderPane.alignment="CENTER" />
+   </center>
+</BorderPane>

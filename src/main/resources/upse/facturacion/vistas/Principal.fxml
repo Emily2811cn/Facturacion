@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: EDD8CE;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="upse.facturacion.controlador.PrincipalController">
+   <top>
+      <MenuBar prefHeight="24.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <menus>
+            <Menu mnemonicParsing="false" text="Archivo">
+               <items>
+                  <MenuItem fx:id="menu_clientes" mnemonicParsing="false" onAction="#acc_menuClientes" text="Clientes" />
+                  <MenuItem mnemonicParsing="false" text="Productos" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Proceso">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Delete" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Reportes">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="About" />
+               </items>
+            </Menu>
+         </menus>
+      </MenuBar>
+   </top>
+   <left>
+      <Accordion prefHeight="400.0" prefWidth="104.0" BorderPane.alignment="CENTER">
+         <panes>
+            <TitledPane animated="false" prefHeight="302.0" prefWidth="116.0" text="Archivo">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="275.0" prefWidth="130.0">
+                     <children>
+                        <Button fx:id="btn_clientes" layoutX="2.0" layoutY="14.0" mnemonicParsing="false" onAction="#acc_clientes" prefHeight="32.0" prefWidth="95.0" style="-fx-background-color: F7B6A8;" text="Clientes">
+                           <graphic>
+                              <ImageView fitHeight="21.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../recursos/cliente.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button fx:id="btn_productos" layoutX="3.0" layoutY="57.0" mnemonicParsing="false" onAction="#acc_productos" prefHeight="35.0" prefWidth="95.0" style="-fx-background-color: DEAFA6;" text="Productos">
+                           <graphic>
+                              <ImageView fitHeight="22.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../recursos/productos.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                     </children>
+                  </AnchorPane>
+               </content>
+               <graphic>
+                  <ImageView fitHeight="40.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../recursos/casa.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </TitledPane>
+            <TitledPane animated="false" text="Proceso">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="btn_facturar" layoutX="17.0" layoutY="24.0" mnemonicParsing="false" onAction="#acc_facturar" prefHeight="33.0" prefWidth="90.0" style="-fx-background-color: F7B6A8;" text="Facturar">
+                           <graphic>
+                              <ImageView fitHeight="26.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../recursos/factura.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                     </children></AnchorPane>
+               </content>
+               <graphic>
+                  <ImageView fitHeight="32.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../recursos/carpeta.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </TitledPane>
+            <TitledPane animated="false" prefHeight="302.0" prefWidth="102.0" text="Reportes">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+               </content>
+               <graphic>
+                  <ImageView fitHeight="19.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../recursos/informe.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </TitledPane>
+            <TitledPane animated="false" prefHeight="302.0" prefWidth="102.0" text="Configuracion">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+
+                  </AnchorPane>
+               </content>
+               <graphic>
+                  <ImageView fitHeight="19.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../recursos/informe.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </TitledPane>
+         </panes>
+      </Accordion>
+   </left>
+   <bottom>
+      <Pane prefHeight="35.0" prefWidth="600.0" style="-fx-background-color: E8C9BA;" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="25.0" layoutY="9.0" text="USUARIO:">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbl_usuario" layoutX="90.0" layoutY="9.0" text="Emily Cruz" />
+         </children>
+      </Pane>
+   </bottom>
+   <center>
+      <StackPane fx:id="datapane" prefHeight="150.0" prefWidth="200.0" style="-fx-background-color: ffffffff;" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="261.0" fitWidth="470.0" opacity="0.24" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../recursos/logo.png" />
+               </image>
+            </ImageView>
+         </children>
+      </StackPane>
+   </center>
+</BorderPane>

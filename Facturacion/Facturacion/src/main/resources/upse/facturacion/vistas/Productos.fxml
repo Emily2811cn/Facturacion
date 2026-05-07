@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="dataPaneProducto" prefHeight="431.0" prefWidth="700.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="upse.facturacion.controlador.ProductosController">
+   <children>
+      <Pane layoutY="-1.0" prefHeight="78.0" prefWidth="700.0" style="-fx-background-color: #660036;">
+         <children>
+            <Label layoutX="40.0" layoutY="30.0" text="%lbl.buscarProducto" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txt_buscar" layoutX="190.0" layoutY="26.0" prefHeight="25.0" prefWidth="280.0" />
+            
+            <RadioButton fx:id="rad_nombre" layoutX="490.0" layoutY="18.0" mnemonicParsing="false" text="%rad.nombre" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </RadioButton>
+            <RadioButton fx:id="rad_codigo" layoutX="490.0" layoutY="45.0" mnemonicParsing="false" text="%rad.codigo" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </RadioButton>
+         </children>
+      </Pane>
+
+      <Pane layoutX="19.0" layoutY="98.0" prefHeight="276.0" prefWidth="655.0" style="-fx-background-color: #E4E9EB;">
+         <children>
+            <TableView fx:id="tb_productos" layoutX="10.0" layoutY="-20.0" onMouseClicked="#acc_Clickedmause" prefHeight="275.0" prefWidth="641.0">
+              <columns>
+                <TableColumn fx:id="col_codigo" prefWidth="120.0" text="%col.codigo" />
+                <TableColumn fx:id="col_nombre" prefWidth="268.0" text="%col.nombre" />
+                <TableColumn fx:id="col_precio" prefWidth="120.0" text="%col.precio" />
+                <TableColumn fx:id="col_stock" prefWidth="120.0" text="%col.stock" />
+              </columns>
+            </TableView>
+         </children>
+      </Pane>
+
+      <Pane layoutY="367.0" prefHeight="85.0" prefWidth="700.0" style="-fx-background-color: #660036;">
+         <children>
+            <Button fx:id="btn_nuevo" contentDisplay="TOP" layoutX="490.0" layoutY="11.0" mnemonicParsing="false" onAction="#acc_nuevo" prefHeight="65.0" prefWidth="75.0" text="%btn.nuevo">
+               <graphic>
+                  <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../recursos/product.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="btn_cerrar" contentDisplay="TOP" layoutX="575.0" layoutY="11.0" mnemonicParsing="false" onAction="#acc_cerrar" prefHeight="65.0" prefWidth="75.0" text="%btn.cerrar">
+               <graphic>
+                  <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../recursos/cancelar.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

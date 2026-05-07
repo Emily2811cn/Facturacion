@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="upse.facturacion.controlador.LoginController">
+   <children>
+      <Pane layoutX="300.0" prefHeight="400.0" prefWidth="300.0" style="-fx-background-color: #290B61;">
+         <children>
+            <ImageView fitHeight="193.0" fitWidth="204.0" layoutX="55.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../recursos/tiendita.png" />
+               </image>
+            </ImageView>
+            <Text fill="WHITE" layoutX="32.0" layoutY="256.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%lbl.tituloPrincipal" textAlignment="CENTER" wrappingWidth="250.2109375">
+               <font>
+                  <Font name="System Bold" size="30.0" />
+               </font>
+            </Text>
+            <ComboBox fx:id="cbx_idioma" layoutX="82.0" layoutY="337.0" prefWidth="150.0" />
+         </children>
+      </Pane>
+
+      <Pane prefHeight="400.0" prefWidth="300.0" style="-fx-background-color: #366600;">
+         <children>
+            <ImageView fitHeight="124.0" fitWidth="122.0" layoutX="89.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../recursos/ico.png" />
+               </image>
+            </ImageView>
+            
+            <Text fill="WHITE" layoutX="63.0" layoutY="176.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%lbl.usuario">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Text>
+            <TextField fx:id="txt_usuario" layoutX="63.0" layoutY="180.0" prefHeight="30.0" prefWidth="182.0" />
+            
+            <Text fill="WHITE" layoutX="63.0" layoutY="235.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%lbl.clave">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Text>
+            <PasswordField fx:id="txt_clave" layoutX="63.0" layoutY="239.0" prefHeight="30.0" prefWidth="182.0" />
+            
+            <Button fx:id="btn_login" layoutX="63.0" layoutY="311.0" mnemonicParsing="false" onAction="#acc_login" prefHeight="40.0" prefWidth="85.0" text="%btn.acceder" />
+            <Button fx:id="btn_cancelar" layoutX="160.0" layoutY="311.0" mnemonicParsing="false" onAction="#acc_cancelar" prefHeight="40.0" prefWidth="85.0" text="%btn.cancelar" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
