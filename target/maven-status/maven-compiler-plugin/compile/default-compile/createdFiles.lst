@@ -1,0 +1,14 @@
+upse\facturacion\modelo\DetFactura.class
+upse\facturacion\controlador\App.class
+upse\facturacion\modelo\CabFactura.class
+upse\facturacion\controlador\ProductoController.class
+upse\facturacion\general\Mod_general.class
+upse\facturacion\controlador\PrincipalController.class
+upse\facturacion\general\Mod_VariablesGlobales.class
+upse\facturacion\general\BD.class
+upse\facturacion\controlador\ClientesController.class
+upse\facturacion\modelo\Productos.class
+upse\facturacion\controlador\FacturacionController.class
+upse\facturacion\controlador\ClienteController.class
+upse\facturacion\controlador\LoginController.class
+upse\facturacion\modelo\Cliente.class

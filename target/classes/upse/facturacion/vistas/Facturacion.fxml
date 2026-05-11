@@ -52,15 +52,15 @@
 
             </children>
         </Pane>
-        <TableView fx:id="tbl_detalle" layoutX="24.0" layoutY="233.0" prefHeight="275.0" prefWidth="830.0">
+        <TableView layoutX="24.0" layoutY="233.0" prefHeight="275.0" prefWidth="830.0">
             <columns>
-                <TableColumn fx:id="col_codigo" prefWidth="69.59997177124023" text="CÓDIGO" />
-                <TableColumn fx:id="col_descripcion" prefWidth="260.8000030517578" text="DESCRIPCIÓN" />
-                <TableColumn fx:id="col_cantidad" prefWidth="81.5999755859375" text="CANTIDAD" />
-                <TableColumn fx:id="col_pvp" prefWidth="131.99993896484375" text="PVP" />
-                <TableColumn fx:id="col_subtotal" prefWidth="129.60003662109375" text="SUBTOTAL" />
-                <TableColumn fx:id="col_aplicaiva" prefWidth="100.00006103515625" text="APLICA IVA" visible="false" />
-                <TableColumn fx:id="col_total" prefWidth="125.60001220703123" text="TOTAL" visible="false" />
+                <TableColumn prefWidth="69.59997177124023" text="CÓDIGO" />
+                <TableColumn prefWidth="260.8000030517578" text="DESCRIPCIÓN" />
+                <TableColumn prefWidth="81.5999755859375" text="CANTIDAD" />
+                <TableColumn prefWidth="131.99993896484375" text="PVP" />
+                <TableColumn prefWidth="129.60003662109375" text="SUBTOTAL" />
+                <TableColumn prefWidth="100.00006103515625" text="APLICA IVA" visible="false" />
+                <TableColumn prefWidth="125.60001220703123" text="TOTAL" />
             </columns>
         </TableView>
         <Label layoutX="580.0" layoutY="518.0" text="SUBTOTAL">

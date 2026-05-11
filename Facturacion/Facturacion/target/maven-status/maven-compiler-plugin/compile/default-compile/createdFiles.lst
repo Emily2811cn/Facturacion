@@ -1,0 +1,11 @@
+upse\facturacion\modelo\Producto.class
+upse\facturacion\controlador\App.class
+upse\facturacion\controlador\ProductoController.class
+upse\facturacion\general\Mod_general.class
+upse\facturacion\controlador\PrincipalController.class
+upse\facturacion\general\BD.class
+upse\facturacion\controlador\ClientesController.class
+upse\facturacion\controlador\ClienteController.class
+upse\facturacion\controlador\LoginController.class
+upse\facturacion\modelo\Cliente.class
+upse\facturacion\controlador\ProductosController.class

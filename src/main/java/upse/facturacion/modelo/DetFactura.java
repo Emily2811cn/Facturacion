@@ -16,14 +16,16 @@ public class DetFactura {
     private float precio;
     private boolean aplicaIva;
     private float total;
+    private float subtotal;
 
-    public DetFactura(String codigo, String prod_nombre, float cantidad, float precio, boolean aplicaIva, float total) {
+    public DetFactura(String codigo, String prod_nombre, float cantidad, float precio, boolean aplicaIva, float total, float subtotal) {
         this.codigo = codigo;
         this.prod_nombre = prod_nombre;
         this.cantidad = cantidad;
         this.precio = precio;
         this.aplicaIva = aplicaIva;
         this.total = total;
+        this.subtotal = subtotal;
     }
 
     public String getCodigo() {
@@ -72,6 +74,14 @@ public class DetFactura {
 
     public void setTotal(float total) {
         this.total = total;
+    }
+
+    public float getSubtotal() {
+        return subtotal;
+    }
+
+    public void setSubtotal(float subtotal) {
+        this.subtotal = subtotal;
     }
     
     
