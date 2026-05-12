@@ -17,15 +17,17 @@
          <children>
             <PasswordField fx:id="txt_clave" layoutX="248.0" layoutY="184.0" opacity="0.65" prefHeight="37.0" prefWidth="222.0" />
             <TextField fx:id="txt_usuario" layoutX="248.0" layoutY="136.0" opacity="0.64" prefHeight="36.0" prefWidth="222.0" />
-            <Text layoutX="150.0" layoutY="159.0" strokeType="OUTSIDE" strokeWidth="0.0" text="USUARIO">
+            <Text fx:id="lbl_usuario" layoutX="150.0" layoutY="159.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%login.usuario">
                <font>
                   <Font size="14.0" />
-               </font></Text>
-            <Text layoutX="150.0" layoutY="208.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CONTRASEÑA">
+               </font>
+            </Text>
+            <Text fx:id="lbl_password" layoutX="150.0" layoutY="208.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%login.contrasena">
                <font>
                   <Font size="14.0" />
-               </font></Text>
-            <Button fx:id="btn_acceder" alignment="TOP_LEFT" contentDisplay="RIGHT" layoutX="336.0" layoutY="238.0" mnemonicParsing="false" onAction="#acc_login" prefHeight="37.0" prefWidth="109.0" style="-fx-background-color: C47729;" text="Acceder">
+               </font>
+            </Text>
+            <Button fx:id="btn_acceder" alignment="TOP_LEFT" contentDisplay="RIGHT" layoutX="336.0" layoutY="238.0" mnemonicParsing="false" onAction="#acc_login" prefHeight="37.0" prefWidth="109.0" style="-fx-background-color: C47729;" text="%login.boton">
                <graphic>
                   <ImageView cache="true" fitHeight="28.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -37,7 +39,7 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <Button fx:id="btn_cancelar" alignment="TOP_LEFT" contentDisplay="RIGHT" layoutX="451.0" layoutY="241.0" mnemonicParsing="false" onAction="#acc_cancelar" prefHeight="29.0" prefWidth="97.0" style="-fx-background-color: EBDBC0;" text="cancelar">
+            <Button fx:id="btn_cancelar" alignment="TOP_LEFT" contentDisplay="RIGHT" layoutX="451.0" layoutY="241.0" mnemonicParsing="false" onAction="#acc_cancelar" prefHeight="29.0" prefWidth="97.0" style="-fx-background-color: EBDBC0;" text="%btn_cancelar">
                <graphic>
                   <ImageView cache="true" fitHeight="33.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -56,7 +58,7 @@
             </ImageView>
             <Pane layoutX="139.0" layoutY="36.0" opacity="0.83" prefHeight="68.0" prefWidth="393.0" style="-fx-background-color: D4A179;">
                <children>
-                  <Text fill="WHITE" layoutX="21.0" layoutY="42.0" smooth="false" strokeType="OUTSIDE" strokeWidth="0.0" text="ACCESO AL SISTEMA DE GESTIÓN" wrappingWidth="350.6285400390625">
+                  <Text fx:id="lbl_sistema" fill="WHITE" layoutX="21.0" layoutY="42.0" smooth="false" strokeType="OUTSIDE" strokeWidth="0.0" text="%lbl_sistema" wrappingWidth="350.6285400390625">
                      <font>
                         <Font name="Californian FB" size="22.0" />
                      </font>
@@ -74,7 +76,7 @@
                </image>
             </ImageView>
             <Pane layoutY="230.0" opacity="0.44" prefHeight="3.0" prefWidth="562.0" style="-fx-background-color: D4A179;" />
-            <ComboBox fx:id="cbo_idioma" layoutX="35.0" layoutY="244.0" prefWidth="150.0" promptText="Idioma" style="-fx-background-color: E3DDDC;" />
+            <ComboBox fx:id="cbo_idioma" layoutX="35.0" layoutY="244.0" prefWidth="150.0" style="-fx-background-color: E3DDDC;" />
          </children>
       </Pane>
    </children>

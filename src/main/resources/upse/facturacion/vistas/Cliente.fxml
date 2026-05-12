@@ -27,7 +27,7 @@
                   </ImageView>
                   <Pane layoutX="122.0" layoutY="33.0" prefHeight="32.0" prefWidth="202.0" style="-fx-background-color: E0B9B1;">
                      <children>
-                        <Text fill="WHITE" layoutX="22.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BUSCAR CLIENTES">
+                        <Text fx:id="lbl_tituloBuscar" fill="WHITE" layoutX="22.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%clientes.titulo.buscar">
                            <font>
                               <Font name="Times New Roman" size="18.0" />
                            </font>
@@ -37,7 +37,7 @@
                         <Bloom threshold="0.82" />
                      </effect>
                   </Pane>
-                  <Button fx:id="btn_cerrar" layoutX="338.0" layoutY="332.0" mnemonicParsing="false" onAction="#acc_cerrar" prefHeight="32.0" prefWidth="95.0" style="-fx-background-color: EBD5D1;" text="Cancelar">
+                  <Button fx:id="btn_cerrar" layoutX="338.0" layoutY="332.0" mnemonicParsing="false" onAction="#acc_cerrar" prefHeight="32.0" prefWidth="127.0" style="-fx-background-color: EBD5D1;" text="%clientes.btn.cancelar">
                      <graphic>
                         <ImageView fitHeight="21.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -49,7 +49,7 @@
                   <Pane layoutX="122.0" layoutY="65.0" prefHeight="1.0" prefWidth="465.0" style="-fx-background-color: A87E76;" />
                   <Line endX="433.60003662109375" endY="9.199996948242188" layoutX="125.0" layoutY="106.0" opacity="0.21" startX="-65.59999084472656" startY="9.199996948242188" />
                   <Line endX="433.60003662109375" endY="9.199996948242188" layoutX="126.0" layoutY="314.0" opacity="0.2" startX="-65.59999084472656" startY="9.199996948242188" />
-                  <Button fx:id="btn_nuevo" layoutX="105.0" layoutY="332.0" mnemonicParsing="false" onAction="#acc_nuevo" prefHeight="32.0" prefWidth="157.0" style="-fx-background-color: E0A399;" text="Nuevo Cliente">
+                  <Button fx:id="btn_nuevo" layoutX="105.0" layoutY="332.0" mnemonicParsing="false" onAction="#acc_nuevo" prefHeight="32.0" prefWidth="157.0" style="-fx-background-color: E0A399;" text="%clientes.btn.nuevo">
                      <graphic>
                         <ImageView fitHeight="21.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -59,13 +59,13 @@
                      </graphic>
                   </Button>
                   <TextField fx:id="txt_buscarCliente" layoutX="54.0" layoutY="80.0" prefHeight="25.0" prefWidth="315.0" />
-                  <RadioButton fx:id="rad_cedula" layoutX="385.0" layoutY="87.0" mnemonicParsing="false" text="Cédula" />
-                  <RadioButton fx:id="rad_nombres" layoutX="465.0" layoutY="87.0" mnemonicParsing="false" text="Nombres" />
+                  <RadioButton fx:id="rad_cedula" layoutX="385.0" layoutY="87.0" mnemonicParsing="false" text="%clientes.radio.cedula" />
+                  <RadioButton fx:id="rad_nombres" layoutX="465.0" layoutY="87.0" mnemonicParsing="false" text="%clientes.radio.nombres" />
                   <TableView fx:id="tbl_clientes" layoutX="45.0" layoutY="124.0" onMouseClicked="#acc_Clickedmause" prefHeight="192.0" prefWidth="510.0">
                     <columns>
-                      <TableColumn fx:id="col_cedula" prefWidth="125.60003280639648" text="Cédula" />
-                      <TableColumn fx:id="col_nombres" minWidth="0.0" prefWidth="208.8000030517578" text="Nombres" />
-                        <TableColumn fx:id="col_direccion" minWidth="0.0" prefWidth="168.800048828125" text="Dirección" />
+                      <TableColumn fx:id="col_cedula" prefWidth="125.60003280639648" text="%clientes.col.cedula" />
+                      <TableColumn fx:id="col_nombres" minWidth="0.0" prefWidth="208.8000030517578" text="%clientes.col.nombres" />
+                      <TableColumn fx:id="col_direccion" minWidth="0.0" prefWidth="168.800048828125" text="%clientes.col.direccion" />
                     </columns>
                   </TableView>
                </children>

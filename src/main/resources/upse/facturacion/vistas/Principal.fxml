@@ -19,18 +19,18 @@
    <top>
       <MenuBar prefHeight="24.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <menus>
-            <Menu mnemonicParsing="false" text="Archivo">
+            <Menu fx:id="menu_archivo" mnemonicParsing="false" text="%menu.archivo">
                <items>
-                  <MenuItem fx:id="menu_clientes" mnemonicParsing="false" onAction="#acc_menuClientes" text="Clientes" />
-                  <MenuItem mnemonicParsing="false" text="Productos" />
+                  <MenuItem fx:id="menu_clientes" mnemonicParsing="false" onAction="#acc_menuClientes" text="%menu.clientes" />
+                  <MenuItem mnemonicParsing="false" text="%menu.productos" />
                </items>
             </Menu>
-            <Menu mnemonicParsing="false" text="Proceso">
+            <Menu fx:id="menu_proceso" mnemonicParsing="false" text="%menu.proceso">
                <items>
                   <MenuItem mnemonicParsing="false" text="Delete" />
                </items>
             </Menu>
-            <Menu mnemonicParsing="false" text="Reportes">
+            <Menu fx:id="menu_reportes" mnemonicParsing="false" text="%menu.reportes">
                <items>
                   <MenuItem mnemonicParsing="false" text="About" />
                </items>
@@ -41,11 +41,11 @@
    <left>
       <Accordion prefHeight="400.0" prefWidth="104.0" BorderPane.alignment="CENTER">
          <panes>
-            <TitledPane animated="false" prefHeight="302.0" prefWidth="116.0" text="Archivo">
+            <TitledPane fx:id="tp_archivo" animated="false" prefHeight="302.0" prefWidth="116.0" text="%menu.archivo">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="275.0" prefWidth="130.0">
                      <children>
-                        <Button fx:id="btn_clientes" layoutX="2.0" layoutY="14.0" mnemonicParsing="false" onAction="#acc_clientes" prefHeight="32.0" prefWidth="95.0" style="-fx-background-color: F7B6A8;" text="Clientes">
+                        <Button fx:id="btn_clientes" layoutX="2.0" layoutY="14.0" mnemonicParsing="false" onAction="#acc_clientes" prefHeight="32.0" prefWidth="95.0" style="-fx-background-color: F7B6A8;" text="%btn.clientes">
                            <graphic>
                               <ImageView fitHeight="21.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -54,7 +54,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button fx:id="btn_productos" layoutX="3.0" layoutY="57.0" mnemonicParsing="false" onAction="#acc_productos" prefHeight="35.0" prefWidth="95.0" style="-fx-background-color: DEAFA6;" text="Productos">
+                        <Button fx:id="btn_productos" layoutX="3.0" layoutY="57.0" mnemonicParsing="false" onAction="#acc_productos" prefHeight="35.0" prefWidth="95.0" style="-fx-background-color: DEAFA6;" text="%btn.productos">
                            <graphic>
                               <ImageView fitHeight="22.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -74,11 +74,11 @@
                   </ImageView>
                </graphic>
             </TitledPane>
-            <TitledPane animated="false" text="Proceso">
+            <TitledPane fx:id="tp_proceso" animated="false" text="%menu.proceso">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Button fx:id="btn_facturar" layoutX="17.0" layoutY="24.0" mnemonicParsing="false" onAction="#acc_facturar" prefHeight="33.0" prefWidth="90.0" style="-fx-background-color: F7B6A8;" text="Facturar">
+                        <Button fx:id="btn_facturar" layoutX="17.0" layoutY="24.0" mnemonicParsing="false" onAction="#acc_facturar" prefHeight="33.0" prefWidth="90.0" style="-fx-background-color: F7B6A8;" text="%btn.facturar">
                            <graphic>
                               <ImageView fitHeight="26.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -87,7 +87,8 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                     </children></AnchorPane>
+                     </children>
+                  </AnchorPane>
                </content>
                <graphic>
                   <ImageView fitHeight="32.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
@@ -97,7 +98,7 @@
                   </ImageView>
                </graphic>
             </TitledPane>
-            <TitledPane animated="false" prefHeight="302.0" prefWidth="102.0" text="Reportes">
+            <TitledPane fx:id="tp_reportes" animated="false" prefHeight="302.0" prefWidth="102.0" text="%menu.reportes">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
                </content>
@@ -109,11 +110,9 @@
                   </ImageView>
                </graphic>
             </TitledPane>
-            <TitledPane animated="false" prefHeight="302.0" prefWidth="102.0" text="Configuracion">
+            <TitledPane fx:id="tp_configuracion" animated="false" prefHeight="302.0" prefWidth="102.0" text="%menu.configuracion">
                <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-
-                  </AnchorPane>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
                </content>
                <graphic>
                   <ImageView fitHeight="19.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">

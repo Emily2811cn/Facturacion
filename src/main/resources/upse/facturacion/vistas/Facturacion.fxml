@@ -17,113 +17,104 @@
     <children>
         <Pane layoutX="18.0" layoutY="14.0" prefHeight="192.0" prefWidth="898.0" style="-fx-background-color: DECFCC;">
             <children>
-                <Label layoutX="73.0" layoutY="18.0" text="FACTURA #">
+                <Label fx:id="lbl_facturaTitulo" layoutX="73.0" layoutY="18.0" text="%fac.titulo">
                     <font>
                         <Font name="System Bold" size="14.0" />
                     </font>
                 </Label>
                 <TextField fx:id="txt_numFactura" editable="false" layoutX="165.0" layoutY="13.0" prefHeight="30.0" prefWidth="330.0" style="-fx-background-color: FFF7F7;" />
                 <TextField fx:id="txt_fecha" editable="false" layoutX="608.0" layoutY="14.0" prefHeight="30.0" prefWidth="220.0" style="-fx-background-color: FFF7F7;" />
-                <Label layoutX="560.0" layoutY="18.0" text="Fecha:">
+                <Label fx:id="lbl_fecha" layoutX="560.0" layoutY="18.0" text="%fac.fecha">
                     <font>
                         <Font size="15.0" />
                     </font>
                 </Label>
-                <Label layoutX="25.0" layoutY="53.0" text="CEDULA/RUC:" />
+                <Label fx:id="lbl_cedula" layoutX="25.0" layoutY="53.0" text="%fac.cedula" />
                 <TextField fx:id="txt_documento" layoutX="121.0" layoutY="49.0" onAction="#acc_buscarCliente" prefHeight="25.0" prefWidth="304.0" />
 
-                <Label layoutX="33.0" layoutY="82.0" text="NOMBRES:" />
+                <Label fx:id="lbl_nombres" layoutX="33.0" layoutY="82.0" text="%fac.nombres" />
                 <TextField fx:id="txt_nombres" layoutX="121.0" layoutY="78.0" prefHeight="25.0" prefWidth="710.0" />
 
-                <Label layoutX="32.0" layoutY="110.0" text="TELÉFONO:" />
+                <Label fx:id="lbl_telefono" layoutX="32.0" layoutY="110.0" text="%fac.telefono" />
                 <TextField fx:id="txt_telefono" layoutX="121.0" layoutY="108.0" prefHeight="25.0" prefWidth="304.0" />
 
-                <Label layoutX="460.0" layoutY="110.0" text="CORREO:" />
+                <Label fx:id="lbl_correo" layoutX="460.0" layoutY="110.0" text="%fac.correo" />
                 <TextField fx:id="txt_email" layoutX="524.0" layoutY="108.0" prefHeight="25.0" prefWidth="304.0" />
 
-                <Label layoutX="30.0" layoutY="141.0" text="DIRECCIÓN:" />
+                <Label fx:id="lbl_direccion" layoutX="30.0" layoutY="141.0" text="%fac.direccion" />
                 <TextArea fx:id="txt_direccion" layoutX="121.0" layoutY="139.0" prefHeight="50.0" prefWidth="710.0" />
 
-                <CheckBox layoutX="436.0" layoutY="53.0" mnemonicParsing="false" text="Validar" />
-
-
-
-                <CheckBox layoutX="436.0" layoutY="53.0" mnemonicParsing="false" text="Validar" />
-
+                <CheckBox fx:id="chk_validar" layoutX="436.0" layoutY="53.0" mnemonicParsing="false" text="%val.validar" />
             </children>
         </Pane>
         <TableView fx:id="tbl_detalle" layoutX="24.0" layoutY="233.0" prefHeight="275.0" prefWidth="830.0">
             <columns>
-                <TableColumn fx:id="col_codigo" prefWidth="69.59997177124023" text="CÓDIGO" />
-                <TableColumn fx:id="col_descripcion" prefWidth="260.8000030517578" text="DESCRIPCIÓN" />
-                <TableColumn fx:id="col_cantidad" prefWidth="81.5999755859375" text="CANTIDAD" />
-                <TableColumn fx:id="col_pvp" prefWidth="131.99993896484375" text="PVP" />
-                <TableColumn fx:id="col_subtotal" prefWidth="129.60003662109375" text="SUBTOTAL" />
-                <TableColumn fx:id="col_aplicaiva" prefWidth="100.00006103515625" text="APLICA IVA" visible="false" />
-                <TableColumn fx:id="col_total" prefWidth="125.60001220703123" text="TOTAL" visible="false" />
+                <TableColumn fx:id="col_codigo" prefWidth="69.59997177124023" text="%fac.col.codigo" />
+                <TableColumn fx:id="col_descripcion" prefWidth="260.8000030517578" text="%fac.col.descripcion" />
+                <TableColumn fx:id="col_cantidad" prefWidth="81.5999755859375" text="%fac.col.cantidad" />
+                <TableColumn fx:id="col_pvp" prefWidth="131.99993896484375" text="%fac.col.pvp" />
+                <TableColumn fx:id="col_subtotal" prefWidth="129.60003662109375" text="%fac.col.subtotal" />
+                <TableColumn fx:id="col_aplicaiva" prefWidth="100.00006103515625" text="%fac.col.aplicaiva" visible="false" />
+                <TableColumn fx:id="col_total" prefWidth="125.60001220703123" text="%fac.col.total" visible="false" />
             </columns>
         </TableView>
-        <Label layoutX="580.0" layoutY="518.0" text="SUBTOTAL">
+        <Label fx:id="lbl_subtotal" layoutX="580.0" layoutY="518.0" text="%fac.subtotal">
             <font>
                 <Font name="System Bold" size="12.0" />
             </font>
         </Label>
-        <TextField layoutX="670.0" layoutY="514.0" prefHeight="26.0" prefWidth="182.0" />
-        <Label layoutX="580.0" layoutY="553.0" text="SUBTOTAL 0%">
+        <TextField fx:id="txt_subtotal" layoutX="670.0" layoutY="514.0" prefHeight="26.0" prefWidth="182.0" />
+        <Label fx:id="lbl_subtotal0" layoutX="580.0" layoutY="553.0" text="%fac.subtotal0">
             <font>
                 <Font name="System Bold" size="12.0" />
             </font>
         </Label>
-        <TextField layoutX="670.0" layoutY="549.0" prefHeight="26.0" prefWidth="182.0" />
-        <Label layoutX="580.0" layoutY="589.0" text="IVA 15%">
+        <TextField fx:id="txt_subtotal0" layoutX="670.0" layoutY="549.0" prefHeight="26.0" prefWidth="182.0" />
+        <Label fx:id="lbl_iva" layoutX="580.0" layoutY="589.0" text="%fac.iva">
             <font>
                 <Font name="System Bold" size="12.0" />
             </font>
         </Label>
-        <TextField layoutX="670.0" layoutY="585.0" prefHeight="26.0" prefWidth="182.0" />
-        <Label layoutX="580.0" layoutY="626.0" text="TOTAL">
+        <TextField fx:id="txt_iva" layoutX="670.0" layoutY="585.0" prefHeight="26.0" prefWidth="182.0" />
+        <Label fx:id="lbl_total" layoutX="580.0" layoutY="626.0" text="%fac.total">
             <font>
                 <Font name="System Bold" size="12.0" />
             </font>
         </Label>
-        <TextField layoutX="670.0" layoutY="622.0" prefHeight="26.0" prefWidth="182.0" />
-        <Button fx:id="btn_grabar" contentDisplay="TOP" layoutX="861.0" layoutY="233.0" mnemonicParsing="false" onAction="#acc_grabar" prefHeight="76.0" prefWidth="58.0" style="-fx-background-color: E0A399;" text="Grabar">
+        <TextField fx:id="txt_total" layoutX="670.0" layoutY="622.0" prefHeight="26.0" prefWidth="182.0" />
+        <Button fx:id="btn_grabar" contentDisplay="TOP" layoutX="861.0" layoutY="233.0" mnemonicParsing="false" onAction="#acc_grabar" prefHeight="76.0" prefWidth="58.0" style="-fx-background-color: E0A399;" text="%fac.btn.grabar">
             <graphic>
                 <ImageView fitHeight="21.0" fitWidth="21.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@../recursos/guardar-el-archivo.png" />
                     </image>
-
                 </ImageView>
             </graphic>
         </Button>
-        <Button fx:id="btn_anular" contentDisplay="TOP" layoutX="861.0" layoutY="321.0" mnemonicParsing="false" onAction="#acc_anular" prefHeight="76.0" prefWidth="58.0" style="-fx-background-color: E0A399;" text="Anular">
+        <Button fx:id="btn_anular" contentDisplay="TOP" layoutX="861.0" layoutY="321.0" mnemonicParsing="false" onAction="#acc_anular" prefHeight="76.0" prefWidth="58.0" style="-fx-background-color: E0A399;" text="%fac.btn.anular">
             <graphic>
                 <ImageView fitHeight="21.0" fitWidth="21.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@../recursos/eliminar.png" />
                     </image>
-                  
                 </ImageView>
             </graphic>
         </Button>
-        <Button fx:id="btn_cerrar" contentDisplay="TOP" layoutX="861.0" layoutY="489.0" mnemonicParsing="false" onAction="#acc_cerrar" prefHeight="76.0" prefWidth="58.0" style="-fx-background-color: E0A399;" text="Cerrar">
+        <Button fx:id="btn_cerrar" contentDisplay="TOP" layoutX="861.0" layoutY="489.0" mnemonicParsing="false" onAction="#acc_cerrar" prefHeight="76.0" prefWidth="58.0" style="-fx-background-color: E0A399;" text="%fac.btn.cerrar">
             <graphic>
                 <ImageView fitHeight="21.0" fitWidth="21.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@../recursos/salir.png" />
                     </image>
-                    
                 </ImageView>
             </graphic>
         </Button>
-        <Button fx:id="btn_nuevo" contentDisplay="TOP" layoutX="861.0" layoutY="405.0" mnemonicParsing="false" onAction="#acc_nuevo" prefHeight="76.0" prefWidth="58.0" style="-fx-background-color: E0A399;" text="Nuevo">
+        <Button fx:id="btn_nuevo" contentDisplay="TOP" layoutX="861.0" layoutY="405.0" mnemonicParsing="false" onAction="#acc_nuevo" prefHeight="76.0" prefWidth="58.0" style="-fx-background-color: E0A399;" text="%fac.btn.nuevo">
             <graphic>
                 <ImageView fitHeight="21.0" fitWidth="21.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@../recursos/registro.png" />
                     </image>
-                    
                 </ImageView>
             </graphic>
         </Button>
