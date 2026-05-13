@@ -18,23 +18,39 @@ import upse.facturacion.modelo.Cliente;
 
 public class ClientesController implements Initializable {
 
-    @FXML private Button btn_guardarCliente;
-    @FXML private TextField txt_cedula;
-    @FXML private TextField txt_direccion;
-    @FXML private TextField txt_nombreCliente;
-    @FXML private TextField txt_email;
-    @FXML private TextField txt_telefono;
-    @FXML private AnchorPane apClientes;
-    @FXML private CheckBox chk_validarCedula;
-    @FXML private Button btn_cerrar;
+    @FXML
+    private Button btn_guardarCliente;
+    @FXML
+    private TextField txt_cedula;
+    @FXML
+    private TextField txt_direccion;
+    @FXML
+    private TextField txt_nombreCliente;
+    @FXML
+    private TextField txt_email;
+    @FXML
+    private TextField txt_telefono;
+    @FXML
+    private AnchorPane apClientes;
+    @FXML
+    private CheckBox chk_validarCedula;
+    @FXML
+    private Button btn_cerrar;
     // Labels de texto (Text no se traduce vía %clave automáticamente)
-    @FXML private Text lbl_tituloClientes;
-    @FXML private Text lbl_agregar;
-    @FXML private Text lbl_cedula;
-    @FXML private Text lbl_nombres;
-    @FXML private Text lbl_telefono;
-    @FXML private Text lbl_email;
-    @FXML private Text lbl_direccion;
+    @FXML
+    private Text lbl_tituloClientes;
+    @FXML
+    private Text lbl_agregar;
+    @FXML
+    private Text lbl_cedula;
+    @FXML
+    private Text lbl_nombres;
+    @FXML
+    private Text lbl_telefono;
+    @FXML
+    private Text lbl_email;
+    @FXML
+    private Text lbl_direccion;
 
     private ResourceBundle bundle;
     int bandera;
@@ -47,13 +63,21 @@ public class ClientesController implements Initializable {
         aplicarIdioma();
 
         txt_cedula.textProperty().addListener((obs, oldVal, newVal) -> {
-            if (!newVal.matches("\\d*")) txt_cedula.setText(newVal.replaceAll("[^\\d]", ""));
-            if (txt_cedula.getText().length() > 10) txt_cedula.setText(txt_cedula.getText().substring(0, 10));
+            if (!newVal.matches("\\d*")) {
+                txt_cedula.setText(newVal.replaceAll("[^\\d]", ""));
+            }
+            if (txt_cedula.getText().length() > 10) {
+                txt_cedula.setText(txt_cedula.getText().substring(0, 10));
+            }
         });
 
         txt_telefono.textProperty().addListener((obs, oldVal, newVal) -> {
-            if (!newVal.matches("\\d*")) txt_telefono.setText(newVal.replaceAll("[^\\d]", ""));
-            if (txt_telefono.getText().length() > 10) txt_telefono.setText(txt_telefono.getText().substring(0, 10));
+            if (!newVal.matches("\\d*")) {
+                txt_telefono.setText(newVal.replaceAll("[^\\d]", ""));
+            }
+            if (txt_telefono.getText().length() > 10) {
+                txt_telefono.setText(txt_telefono.getText().substring(0, 10));
+            }
         });
 
         Mod_general.detectarTecla(txt_cedula, KeyCode.ENTER, txt_nombreCliente);
@@ -66,41 +90,76 @@ public class ClientesController implements Initializable {
 
     private void aplicarIdioma() {
         try {
-            if (lbl_tituloClientes != null) lbl_tituloClientes.setText(t("clientes.titulo", "CLIENTES"));
-            if (lbl_agregar != null)        lbl_agregar.setText(t("clientes.agregar", "Agregar Clientes"));
-            if (lbl_cedula != null)         lbl_cedula.setText(t("lbl_cedula_field", "Cédula:"));
-            if (lbl_nombres != null)        lbl_nombres.setText(t("lbl_nombres_field", "Nombres:"));
-            if (lbl_telefono != null)       lbl_telefono.setText(t("lbl_telefono_field", "Teléfono:"));
-            if (lbl_email != null)          lbl_email.setText(t("lbl_email_field", "E-mail:"));
-            if (lbl_direccion != null)      lbl_direccion.setText(t("lbl_direccion_field", "Dirección:"));
-            if (btn_guardarCliente != null) btn_guardarCliente.setText(t("clientes.btn.guardar", "Guardar cliente"));
-            if (btn_cerrar != null)         btn_cerrar.setText(t("clientes.btn.cancelar", "Cancelar"));
-            if (chk_validarCedula != null)  chk_validarCedula.setText(t("lbl_validar", "Validar"));
+            if (lbl_tituloClientes != null) {
+                lbl_tituloClientes.setText(t("clientes.titulo", "CLIENTES"));
+            }
+            if (lbl_agregar != null) {
+                lbl_agregar.setText(t("clientes.agregar", "Agregar Clientes"));
+            }
+            if (lbl_cedula != null) {
+                lbl_cedula.setText(t("lbl_cedula_field", "Cédula:"));
+            }
+            if (lbl_nombres != null) {
+                lbl_nombres.setText(t("lbl_nombres_field", "Nombres:"));
+            }
+            if (lbl_telefono != null) {
+                lbl_telefono.setText(t("lbl_telefono_field", "Teléfono:"));
+            }
+            if (lbl_email != null) {
+                lbl_email.setText(t("lbl_email_field", "E-mail:"));
+            }
+            if (lbl_direccion != null) {
+                lbl_direccion.setText(t("lbl_direccion_field", "Dirección:"));
+            }
+            if (btn_guardarCliente != null) {
+                btn_guardarCliente.setText(t("clientes.btn.guardar", "Guardar cliente"));
+            }
+            if (btn_cerrar != null) {
+                btn_cerrar.setText(t("clientes.btn.cancelar", "Cancelar"));
+            }
+            if (chk_validarCedula != null) {
+                chk_validarCedula.setText(t("lbl_validar", "Validar"));
+            }
         } catch (Exception e) {
             // ignorar
         }
     }
 
     private String t(String key, String fallback) {
-        try { return bundle.getString(key); } catch (Exception e) { return fallback; }
+        try {
+            return bundle.getString(key);
+        } catch (Exception e) {
+            return fallback;
+        }
     }
 
     @FXML
     private void acc_guardarCliente(ActionEvent event) {
         try {
-            if (!fun_validar()) return;
+            if (!fun_validar()) {
+                return;
+            }
             if (bandera == 0) {
                 Cliente obj = new Cliente(
-                    this.txt_cedula.getText(),
-                    this.txt_nombreCliente.getText(),
-                    this.txt_telefono.getText(),
-                    this.txt_email.getText(),
-                    this.txt_direccion.getText()
+                        txt_cedula.getText(),
+                        txt_nombreCliente.getText(),
+                        txt_telefono.getText(),
+                        txt_email.getText(),
+                        txt_direccion.getText()
                 );
                 BD.listaClientes.add(obj);
+            } else {
+                Cliente objCliente = fun_retornaCliente(txt_cedula.getText());
+                if (objCliente != null) {
+                    objCliente.setNombres(txt_nombreCliente.getText());
+                    objCliente.setTelefono(txt_telefono.getText());
+                    objCliente.setEmail(txt_email.getText());
+                    objCliente.setDireccion(txt_direccion.getText());
+                }
             }
-            this.cerrarFormulario();
-        } catch (Exception e) { }
+            cerrarFormulario();
+        } catch (Exception e) {
+        }
     }
 
     private boolean fun_validar() {
@@ -174,7 +233,9 @@ public class ClientesController implements Initializable {
 
     private Cliente fun_retornaCliente(String id) {
         for (Cliente objCliente : BD.listaClientes) {
-            if (objCliente.getCedula().equals(id)) return objCliente;
+            if (objCliente.getCedula().equals(id)) {
+                return objCliente;
+            }
         }
         return null;
     }

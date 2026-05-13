@@ -27,30 +27,53 @@ import upse.facturacion.modelo.CabFactura;
 
 public class FacturacionController implements Initializable {
 
-    @FXML private Button btn_grabar, btn_anular, btn_cerrar, btn_nuevo;
-    @FXML private TextField txt_numFactura, txt_fecha, txt_documento, txt_nombres, txt_telefono, txt_email;
-    @FXML private TextArea txt_direccion;
-    @FXML private AnchorPane datapaneFac;
-    @FXML private TableView<DetFactura> tbl_detalle;
-    @FXML private TableColumn<DetFactura, String> col_codigo;
-    @FXML private TableColumn<DetFactura, String> col_descripcion;
-    @FXML private TableColumn<DetFactura, Float> col_cantidad;
-    @FXML private TableColumn<DetFactura, Float> col_pvp;
-    @FXML private TableColumn<DetFactura, Float> col_subtotal;
-    @FXML private TableColumn<DetFactura, Boolean> col_aplicaiva;
-    @FXML private TableColumn<DetFactura, Float> col_total;
+    @FXML
+    private Button btn_grabar, btn_anular, btn_cerrar, btn_nuevo;
+    @FXML
+    private TextField txt_numFactura, txt_fecha, txt_documento, txt_nombres, txt_telefono, txt_email;
+    @FXML
+    private TextArea txt_direccion;
+    @FXML
+    private AnchorPane datapaneFac;
+    @FXML
+    private TableView<DetFactura> tbl_detalle;
+    @FXML
+    private TableColumn<DetFactura, String> col_codigo;
+    @FXML
+    private TableColumn<DetFactura, String> col_descripcion;
+    @FXML
+    private TableColumn<DetFactura, Float> col_cantidad;
+    @FXML
+    private TableColumn<DetFactura, Float> col_pvp;
+    @FXML
+    private TableColumn<DetFactura, Float> col_subtotal;
+    @FXML
+    private TableColumn<DetFactura, Boolean> col_aplicaiva;
+    @FXML
+    private TableColumn<DetFactura, Float> col_total;
     // Labels traducibles (los que tienen fx:id en el FXML)
-    @FXML private Label lbl_facturaTitulo;
-    @FXML private Label lbl_fecha;
-    @FXML private Label lbl_cedula;
-    @FXML private Label lbl_nombres;
-    @FXML private Label lbl_telefono;
-    @FXML private Label lbl_correo;
-    @FXML private Label lbl_direccion;
-    @FXML private Label lbl_subtotal;
-    @FXML private Label lbl_subtotal0;
-    @FXML private Label lbl_iva;
-    @FXML private Label lbl_total;
+    @FXML
+    private Label lbl_facturaTitulo;
+    @FXML
+    private Label lbl_fecha;
+    @FXML
+    private Label lbl_cedula;
+    @FXML
+    private Label lbl_nombres;
+    @FXML
+    private Label lbl_telefono;
+    @FXML
+    private Label lbl_correo;
+    @FXML
+    private Label lbl_direccion;
+    @FXML
+    private Label lbl_subtotal;
+    @FXML
+    private Label lbl_subtotal0;
+    @FXML
+    private Label lbl_iva;
+    @FXML
+    private Label lbl_total;
 
     private ArrayList<DetFactura> detalleFactura = new ArrayList<>();
     private int bandera = 0;
@@ -77,35 +100,83 @@ public class FacturacionController implements Initializable {
 
     private void aplicarIdioma() {
         try {
-            if (lbl_facturaTitulo != null) lbl_facturaTitulo.setText(t("fac.titulo", "FACTURA #"));
-            if (lbl_fecha != null)         lbl_fecha.setText(t("fac.fecha", "Fecha:"));
-            if (lbl_cedula != null)        lbl_cedula.setText(t("fac.cedula", "CEDULA/RUC:"));
-            if (lbl_nombres != null)       lbl_nombres.setText(t("fac.nombres", "NOMBRES:"));
-            if (lbl_telefono != null)      lbl_telefono.setText(t("fac.telefono", "TELÉFONO:"));
-            if (lbl_correo != null)        lbl_correo.setText(t("fac.correo", "CORREO:"));
-            if (lbl_direccion != null)     lbl_direccion.setText(t("fac.direccion", "DIRECCIÓN:"));
-            if (lbl_subtotal != null)      lbl_subtotal.setText(t("fac.subtotal", "SUBTOTAL"));
-            if (lbl_subtotal0 != null)     lbl_subtotal0.setText(t("fac.subtotal0", "SUBTOTAL 0%"));
-            if (lbl_iva != null)           lbl_iva.setText(t("fac.iva", "IVA 15%"));
-            if (lbl_total != null)         lbl_total.setText(t("fac.total", "TOTAL"));
-            if (btn_grabar != null)        btn_grabar.setText(t("fac.btn.grabar", "Grabar"));
-            if (btn_anular != null)        btn_anular.setText(t("fac.btn.anular", "Anular"));
-            if (btn_cerrar != null)        btn_cerrar.setText(t("fac.btn.cerrar", "Cerrar"));
-            if (btn_nuevo != null)         btn_nuevo.setText(t("fac.btn.nuevo", "Nuevo"));
-            if (col_codigo != null)        col_codigo.setText(t("fac.col.codigo", "CÓDIGO"));
-            if (col_descripcion != null)   col_descripcion.setText(t("fac.col.descripcion", "DESCRIPCIÓN"));
-            if (col_cantidad != null)      col_cantidad.setText(t("fac.col.cantidad", "CANTIDAD"));
-            if (col_pvp != null)           col_pvp.setText(t("fac.col.pvp", "PVP"));
-            if (col_subtotal != null)      col_subtotal.setText(t("fac.col.subtotal", "SUBTOTAL"));
-            if (col_aplicaiva != null)     col_aplicaiva.setText(t("fac.col.aplicaiva", "APLICA IVA"));
-            if (col_total != null)         col_total.setText(t("fac.col.total", "TOTAL"));
+            if (lbl_facturaTitulo != null) {
+                lbl_facturaTitulo.setText(t("fac.titulo", "FACTURA #"));
+            }
+            if (lbl_fecha != null) {
+                lbl_fecha.setText(t("fac.fecha", "Fecha:"));
+            }
+            if (lbl_cedula != null) {
+                lbl_cedula.setText(t("fac.cedula", "CEDULA/RUC:"));
+            }
+            if (lbl_nombres != null) {
+                lbl_nombres.setText(t("fac.nombres", "NOMBRES:"));
+            }
+            if (lbl_telefono != null) {
+                lbl_telefono.setText(t("fac.telefono", "TELÉFONO:"));
+            }
+            if (lbl_correo != null) {
+                lbl_correo.setText(t("fac.correo", "CORREO:"));
+            }
+            if (lbl_direccion != null) {
+                lbl_direccion.setText(t("fac.direccion", "DIRECCIÓN:"));
+            }
+            if (lbl_subtotal != null) {
+                lbl_subtotal.setText(t("fac.subtotal", "SUBTOTAL"));
+            }
+            if (lbl_subtotal0 != null) {
+                lbl_subtotal0.setText(t("fac.subtotal0", "SUBTOTAL 0%"));
+            }
+            if (lbl_iva != null) {
+                lbl_iva.setText(t("fac.iva", "IVA 15%"));
+            }
+            if (lbl_total != null) {
+                lbl_total.setText(t("fac.total", "TOTAL"));
+            }
+            if (btn_grabar != null) {
+                btn_grabar.setText(t("fac.btn.grabar", "Grabar"));
+            }
+            if (btn_anular != null) {
+                btn_anular.setText(t("fac.btn.anular", "Anular"));
+            }
+            if (btn_cerrar != null) {
+                btn_cerrar.setText(t("fac.btn.cerrar", "Cerrar"));
+            }
+            if (btn_nuevo != null) {
+                btn_nuevo.setText(t("fac.btn.nuevo", "Nuevo"));
+            }
+            if (col_codigo != null) {
+                col_codigo.setText(t("fac.col.codigo", "CÓDIGO"));
+            }
+            if (col_descripcion != null) {
+                col_descripcion.setText(t("fac.col.descripcion", "DESCRIPCIÓN"));
+            }
+            if (col_cantidad != null) {
+                col_cantidad.setText(t("fac.col.cantidad", "CANTIDAD"));
+            }
+            if (col_pvp != null) {
+                col_pvp.setText(t("fac.col.pvp", "PVP"));
+            }
+            if (col_subtotal != null) {
+                col_subtotal.setText(t("fac.col.subtotal", "SUBTOTAL"));
+            }
+            if (col_aplicaiva != null) {
+                col_aplicaiva.setText(t("fac.col.aplicaiva", "APLICA IVA"));
+            }
+            if (col_total != null) {
+                col_total.setText(t("fac.col.total", "TOTAL"));
+            }
         } catch (Exception e) {
             // ignorar
         }
     }
 
     private String t(String key, String fallback) {
-        try { return bundle.getString(key); } catch (Exception e) { return fallback; }
+        try {
+            return bundle.getString(key);
+        } catch (Exception e) {
+            return fallback;
+        }
     }
 
     private void buscarYLlenarCliente() {
@@ -132,27 +203,32 @@ public class FacturacionController implements Initializable {
         Cliente cliente = BD.recuperarCliente(cedula);
 
         if (cliente == null) {
-            bandera = 0;
             cliente = new Cliente(cedula, txt_nombres.getText(), txt_telefono.getText(),
-                                  txt_email.getText(), txt_direccion.getText());
-            BD.guardarCliente(cliente);
+                    txt_email.getText(), txt_direccion.getText());
+            BD.listaClientes.add(cliente);
         } else {
-            bandera = 1;
+            cliente.setNombres(txt_nombres.getText());
+            cliente.setTelefono(txt_telefono.getText());
+            cliente.setEmail(txt_email.getText());
+            cliente.setDireccion(txt_direccion.getText());
         }
 
         float subtotal = 0, subtotalCero = 0, iva = 0, total = 0;
         for (DetFactura det : detalleFactura) {
-            if (det.isAplicaIva()) subtotal += det.getTotal();
-            else subtotalCero += det.getTotal();
+            if (det.isAplicaIva()) {
+                subtotal += det.getTotal();
+            } else {
+                subtotalCero += det.getTotal();
+            }
         }
         iva = subtotal * 0.12f;
         total = subtotal + subtotalCero + iva;
 
         CabFactura factura = new CabFactura(
-            Integer.parseInt(txt_numFactura.getText()), txt_fecha.getText(),
-            cedula, txt_nombres.getText(), txt_direccion.getText(),
-            txt_telefono.getText(), txt_email.getText(), detalleFactura,
-            subtotal, subtotalCero, iva, total
+                Integer.parseInt(txt_numFactura.getText()), txt_fecha.getText(),
+                cedula, txt_nombres.getText(), txt_direccion.getText(),
+                txt_telefono.getText(), txt_email.getText(), detalleFactura,
+                subtotal, subtotalCero, iva, total
         );
 
         BD.guardarFactura(factura);
@@ -161,9 +237,15 @@ public class FacturacionController implements Initializable {
 
     @FXML
     private void acc_anular(ActionEvent event) {
-        txt_numFactura.clear(); txt_fecha.clear(); txt_documento.clear();
-        txt_nombres.clear(); txt_telefono.clear(); txt_email.clear();
-        txt_direccion.clear(); detalleFactura.clear(); bandera = 0;
+        txt_numFactura.clear();
+        txt_fecha.clear();
+        txt_documento.clear();
+        txt_nombres.clear();
+        txt_telefono.clear();
+        txt_email.clear();
+        txt_direccion.clear();
+        detalleFactura.clear();
+        bandera = 0;
         Mod_general.fun_mensajeInformacion(t("msg.factura.anulada", "Factura anulada."));
     }
 
@@ -180,10 +262,14 @@ public class FacturacionController implements Initializable {
     private void acc_nuevo(ActionEvent event) {
         txt_numFactura.setText(Mod_VariablesGlobales.generarNumeroFactura());
         txt_fecha.setText(Mod_VariablesGlobales.obtenerFechaHoy());
-        txt_documento.clear(); txt_nombres.clear(); txt_telefono.clear();
-        txt_email.clear(); txt_direccion.clear(); detalleFactura.clear();
+        txt_documento.clear();
+        txt_nombres.clear();
+        txt_telefono.clear();
+        txt_email.clear();
+        txt_direccion.clear();
+        detalleFactura.clear();
         String msg = t("msg.factura.nueva", "Nueva factura lista con número: ")
-                     + txt_numFactura.getText();
+                + txt_numFactura.getText();
         Mod_general.fun_mensajeInformacion(msg);
     }
 

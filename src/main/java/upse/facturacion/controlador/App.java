@@ -31,7 +31,7 @@ public class App extends Application {
         Scene scene = new Scene(ventana);
         stage.setScene(scene);
         stage.getIcons().add(new Image("/upse/facturacion/recursos/cafelogo.png"));
-        stage.setTitle("--SISTEMA DE FACTURACION--");
+        stage.setTitle("--OASIS COFFEE--");
         stage.setResizable(false);
         stage.show();
     }

@@ -28,18 +28,29 @@ import upse.facturacion.modelo.Cliente;
 
 public class ClienteController implements Initializable {
 
-    @FXML private Button btn_nuevo;
-    @FXML private TextField txt_buscarCliente;
-    @FXML private RadioButton rad_cedula;
-    @FXML private RadioButton rad_nombres;
-    @FXML private TableView<Cliente> tbl_clientes;
-    @FXML private TableColumn<?, ?> col_cedula;
-    @FXML private TableColumn<?, ?> col_nombres;
-    @FXML private TableColumn<?, ?> col_direccion;
-    @FXML private Button btn_cerrar;
-    @FXML private AnchorPane dataPaneCliente;
+    @FXML
+    private Button btn_nuevo;
+    @FXML
+    private TextField txt_buscarCliente;
+    @FXML
+    private RadioButton rad_cedula;
+    @FXML
+    private RadioButton rad_nombres;
+    @FXML
+    private TableView<Cliente> tbl_clientes;
+    @FXML
+    private TableColumn<?, ?> col_cedula;
+    @FXML
+    private TableColumn<?, ?> col_nombres;
+    @FXML
+    private TableColumn<?, ?> col_direccion;
+    @FXML
+    private Button btn_cerrar;
+    @FXML
+    private AnchorPane dataPaneCliente;
     // Texto del título (Text no soporta %clave nativamente, lo traducimos aquí)
-    @FXML private Text lbl_tituloBuscar;
+    @FXML
+    private Text lbl_tituloBuscar;
 
     private ToggleGroup grupoBusqueda;
 
@@ -72,29 +83,41 @@ public class ClienteController implements Initializable {
 
     private void aplicarIdioma(ResourceBundle rb) {
         try {
-            if (lbl_tituloBuscar != null)
+            if (lbl_tituloBuscar != null) {
                 lbl_tituloBuscar.setText(t(rb, "clientes.titulo.buscar", "BUSCAR CLIENTES"));
-            if (btn_nuevo != null)
+            }
+            if (btn_nuevo != null) {
                 btn_nuevo.setText(t(rb, "clientes.btn.nuevo", "Nuevo Cliente"));
-            if (btn_cerrar != null)
+            }
+            if (btn_cerrar != null) {
                 btn_cerrar.setText(t(rb, "clientes.btn.cancelar", "Cancelar"));
-            if (rad_cedula != null)
+            }
+            if (rad_cedula != null) {
                 rad_cedula.setText(t(rb, "clientes.radio.cedula", "Cédula"));
-            if (rad_nombres != null)
+            }
+            if (rad_nombres != null) {
                 rad_nombres.setText(t(rb, "clientes.radio.nombres", "Nombres"));
-            if (col_cedula != null)
+            }
+            if (col_cedula != null) {
                 col_cedula.setText(t(rb, "clientes.col.cedula", "Cédula"));
-            if (col_nombres != null)
+            }
+            if (col_nombres != null) {
                 col_nombres.setText(t(rb, "clientes.col.nombres", "Nombres"));
-            if (col_direccion != null)
+            }
+            if (col_direccion != null) {
                 col_direccion.setText(t(rb, "clientes.col.direccion", "Dirección"));
+            }
         } catch (Exception e) {
             // ignorar
         }
     }
 
     private String t(ResourceBundle rb, String key, String fallback) {
-        try { return rb.getString(key); } catch (Exception e) { return fallback; }
+        try {
+            return rb.getString(key);
+        } catch (Exception e) {
+            return fallback;
+        }
     }
 
     @FXML
@@ -115,8 +138,7 @@ public class ClienteController implements Initializable {
     private void abrirModal(String id) {
         try {
             ResourceBundle bundle = Mod_general.getBundle();
-            FXMLLoader loader = new FXMLLoader(
-                App.class.getResource("/upse/facturacion/vistas/Clientes.fxml"), bundle);
+            FXMLLoader loader = new FXMLLoader(App.class.getResource("/upse/facturacion/vistas/Clientes.fxml"), bundle);
             Parent root = loader.load();
             ClientesController controlador = loader.getController();
             controlador.recuperarCliente(id);
@@ -127,7 +149,8 @@ public class ClienteController implements Initializable {
             mystage.setScene(scene);
             mystage.setResizable(false);
             mystage.showAndWait();
-            this.cargarClientes();
+            cargarClientes();
+            tbl_clientes.refresh(); // 🔹 refrescar tabla
         } catch (Exception e) {
             Mod_general.fun_mensajeError("Error al abrir modal");
         }
@@ -142,7 +165,8 @@ public class ClienteController implements Initializable {
                     this.abrirModal(objSeleccionado.getCedula());
                 }
             }
-        } catch (Exception e) { }
+        } catch (Exception e) {
+        }
     }
 
     private void filtrarTabla(String criterio) {
