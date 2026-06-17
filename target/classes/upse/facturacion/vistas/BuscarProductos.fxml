@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/25" fx:controller="upse.facturacion.controlador.BuscarProductosController">
+   <children>
+      <Pane prefHeight="57.0" prefWidth="898.0" style="-fx-background-color: DECFCC;">
+         <children>
+            <Text layoutX="309.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BUSCAR PRODUCTOS">
+               <font>
+                  <Font name="Californian FB" size="28.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
+      <Text layoutX="115.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CÓDIGO:" />
+      <Text layoutX="108.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" text="NOMBRES: " />
+      <TextField layoutX="206.0" layoutY="76.0" prefHeight="26.0" prefWidth="171.0" />
+      <TextField layoutX="206.0" layoutY="111.0" prefHeight="26.0" prefWidth="455.0" />
+   </children>
+</AnchorPane>
