@@ -12,7 +12,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import upse.facturacion.general.BD;
+import upse.facturacion.MAD.Mad_Clientes;
 import upse.facturacion.general.Mod_general;
 import upse.facturacion.modelo.Cliente;
 
@@ -54,7 +54,7 @@ public class ClientesController implements Initializable {
 
     private ResourceBundle bundle;
     int bandera;
-
+    Mad_Clientes madCliente=new Mad_Clientes();
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         this.bundle = (rb != null) ? rb : Mod_general.getBundle();
@@ -140,24 +140,24 @@ public class ClientesController implements Initializable {
                 return;
             }
             if (bandera == 0) {
-                Cliente obj = new Cliente(
+               /* Cliente obj = new Cliente(
                         txt_cedula.getText(),
                         txt_nombreCliente.getText(),
                         txt_telefono.getText(),
                         txt_email.getText(),
                         txt_direccion.getText()
-                );
-                BD.listaClientes.add(obj);
+                );*/
+                //BD.listaClientes.add(obj);
             } else {
-                Cliente objCliente = fun_retornaCliente(txt_cedula.getText());
+                /*Cliente objCliente = fun_retornaCliente(txt_cedula.getText());
                 if (objCliente != null) {
                     objCliente.setNombres(txt_nombreCliente.getText());
                     objCliente.setTelefono(txt_telefono.getText());
                     objCliente.setEmail(txt_email.getText());
                     objCliente.setDireccion(txt_direccion.getText());
-                }
+                }*/
             }
-            cerrarFormulario();
+            //cerrarFormulario();
         } catch (Exception e) {
         }
     }
@@ -221,24 +221,17 @@ public class ClientesController implements Initializable {
     }
 
     private void recuperarcliente(String id) {
-        Cliente objCliente = fun_retornaCliente(id);
+        Cliente objCliente = this.madCliente.buscaClientexId(Integer.parseInt(id));
         if (objCliente != null) {
-            this.txt_cedula.setText(objCliente.getCedula());
-            this.txt_nombreCliente.setText(objCliente.getNombres());
-            this.txt_direccion.setText(objCliente.getDireccion());
-            this.txt_telefono.setText(objCliente.getTelefono());
-            this.txt_email.setText(objCliente.getEmail());
+            this.txt_cedula.setText(objCliente.getCli_cedula());
+            this.txt_nombreCliente.setText(objCliente.getCli_nombres());
+            this.txt_direccion.setText(objCliente.getCli_direccion());
+            this.txt_telefono.setText(objCliente.getCli_telefono());
+            this.txt_email.setText(objCliente.getCli_correo());
         }
     }
 
-    private Cliente fun_retornaCliente(String id) {
-        for (Cliente objCliente : BD.listaClientes) {
-            if (objCliente.getCedula().equals(id)) {
-                return objCliente;
-            }
-        }
-        return null;
-    }
+   
 
     @FXML
     private void acc_cerrar(ActionEvent event) {

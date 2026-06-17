@@ -24,7 +24,7 @@
                 </Label>
                 <TextField fx:id="txt_numFactura" editable="false" layoutX="165.0" layoutY="13.0" prefHeight="30.0" prefWidth="330.0" style="-fx-background-color: FFF7F7;" />
                 <TextField fx:id="txt_fecha" editable="false" layoutX="608.0" layoutY="14.0" prefHeight="30.0" prefWidth="220.0" style="-fx-background-color: FFF7F7;" />
-                <Label fx:id="lbl_fecha" layoutX="560.0" layoutY="18.0" text="%fac.fecha">
+                <Label fx:id="lbl_fecha" layoutX="676.0" layoutY="18.0" text="%fac.fecha">
                     <font>
                         <Font size="15.0" />
                     </font>
@@ -47,13 +47,13 @@
                 <CheckBox fx:id="chk_validar" layoutX="436.0" layoutY="53.0" mnemonicParsing="false" text="%val.validar" />
             </children>
         </Pane>
-        <TableView fx:id="tbl_detalle" layoutX="24.0" layoutY="233.0" prefHeight="275.0" prefWidth="830.0">
+        <TableView fx:id="tbl_detalle" editable="true" layoutX="24.0" layoutY="233.0" prefHeight="275.0" prefWidth="830.0">
             <columns>
-                <TableColumn fx:id="col_codigo" prefWidth="69.59997177124023" text="%fac.col.codigo" />
-                <TableColumn fx:id="col_descripcion" prefWidth="260.8000030517578" text="%fac.col.descripcion" />
-                <TableColumn fx:id="col_cantidad" prefWidth="81.5999755859375" text="%fac.col.cantidad" />
-                <TableColumn fx:id="col_pvp" prefWidth="131.99993896484375" text="%fac.col.pvp" />
-                <TableColumn fx:id="col_subtotal" prefWidth="129.60003662109375" text="%fac.col.subtotal" />
+                <TableColumn fx:id="col_codigo" prefWidth="69.59997177124023" text="%fac.col.codigo" editable="true"/>
+                <TableColumn fx:id="col_descripcion" prefWidth="260.8000030517578" text="%fac.col.descripcion" editable="true"/>
+                <TableColumn fx:id="col_cantidad" prefWidth="81.5999755859375" text="%fac.col.cantidad" editable="true"/>
+                <TableColumn fx:id="col_pvp" prefWidth="131.99993896484375" text="%fac.col.pvp" editable="true"/>
+                <TableColumn fx:id="col_subtotal" prefWidth="129.60003662109375" text="%fac.col.subtotal" editable="true"/>
                 <TableColumn fx:id="col_aplicaiva" prefWidth="100.00006103515625" text="%fac.col.aplicaiva" visible="false" />
                 <TableColumn fx:id="col_total" prefWidth="125.60001220703123" text="%fac.col.total" visible="false" />
             </columns>

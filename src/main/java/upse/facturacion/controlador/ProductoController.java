@@ -10,9 +10,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
-import upse.facturacion.general.BD;
 import upse.facturacion.general.Mod_general;
-import upse.facturacion.modelo.Productos;
 
 public class ProductoController implements Initializable {
 
@@ -100,7 +98,7 @@ public class ProductoController implements Initializable {
 
     @FXML
     private void acc_guardarProducto(ActionEvent event) {
-        if (fun_validar()) {
+        /*if (fun_validar()) {
             String categoria = cbo_categoria.getValue().toString();
             String codigo = generarCodigoPorCategoria(categoria);
 
@@ -117,7 +115,7 @@ public class ProductoController implements Initializable {
             String msg = t("msg.producto.guardado", "Producto guardado con código")
                          + " " + nuevo.getCodigo();
             Mod_general.fun_mensajeInformacion(msg);
-        }
+        }*/
     }
 
     @FXML
@@ -132,7 +130,7 @@ public class ProductoController implements Initializable {
         txt_nombreProducto.requestFocus();
     }
 
-    private String generarCodigoPorCategoria(String categoria) {
+    /*private String generarCodigoPorCategoria(String categoria) {
         // Mapeo por prefijo según valor en lista (independiente del idioma)
         int idx = cbo_categoria.getItems().indexOf(categoria);
         String[] prefijos = {"C", "F", "R", "S", "E"};
@@ -141,7 +139,7 @@ public class ProductoController implements Initializable {
             .filter(p -> p.getCategoria().equals(categoria))
             .count();
         return String.format("%s%03d", prefijo, count + 1);
-    }
+    }*/
 
     private boolean fun_validar() {
         if (txt_nombreProducto.getText().isEmpty()) {

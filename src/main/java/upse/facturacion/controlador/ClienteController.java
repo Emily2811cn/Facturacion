@@ -2,6 +2,7 @@ package upse.facturacion.controlador;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,8 +23,9 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import upse.facturacion.general.BD;
+import upse.facturacion.MAD.Mad_Clientes;
 import upse.facturacion.general.Mod_general;
+import static upse.facturacion.general.Mod_general.fun_mensajeError;
 import upse.facturacion.modelo.Cliente;
 
 public class ClienteController implements Initializable {
@@ -53,6 +55,7 @@ public class ClienteController implements Initializable {
     private Text lbl_tituloBuscar;
 
     private ToggleGroup grupoBusqueda;
+    private ObservableList<Cliente> listaClientes;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -61,9 +64,9 @@ public class ClienteController implements Initializable {
             aplicarIdioma(rb);
         }
 
-        this.col_cedula.setCellValueFactory(new PropertyValueFactory<>("cedula"));
-        this.col_nombres.setCellValueFactory(new PropertyValueFactory<>("nombres"));
-        this.col_direccion.setCellValueFactory(new PropertyValueFactory<>("direccion"));
+        this.col_cedula.setCellValueFactory(new PropertyValueFactory<>("cli_cedula"));
+        this.col_nombres.setCellValueFactory(new PropertyValueFactory<>("cli_nombres"));
+        this.col_direccion.setCellValueFactory(new PropertyValueFactory<>("cli_direccion"));
 
         cargarClientes();
 
@@ -73,11 +76,11 @@ public class ClienteController implements Initializable {
         rad_cedula.setSelected(true);
 
         txt_buscarCliente.textProperty().addListener((obs, oldValue, newValue) -> {
-            filtrarTabla(newValue);
+            // filtrarTabla(newValue);
         });
 
         grupoBusqueda.selectedToggleProperty().addListener((obs, oldToggle, newToggle) -> {
-            filtrarTabla(txt_buscarCliente.getText());
+            //filtrarTabla(txt_buscarCliente.getText());
         });
     }
 
@@ -131,8 +134,15 @@ public class ClienteController implements Initializable {
     }
 
     private void cargarClientes() {
-        this.tbl_clientes.getItems().clear();
-        this.tbl_clientes.getItems().addAll(BD.listaClientes);
+        //   this.tbl_clientes.getItems().addAll(BD.listaClientes);
+        try {
+            Mad_Clientes madCliente = new Mad_Clientes();
+            this.tbl_clientes.getItems().clear();
+            this.listaClientes=madCliente.getClientes();
+            this.tbl_clientes.setItems(listaClientes);
+        } catch (Exception e) {
+            fun_mensajeError(e.getMessage());
+        }
     }
 
     private void abrirModal(String id) {
@@ -141,7 +151,7 @@ public class ClienteController implements Initializable {
             FXMLLoader loader = new FXMLLoader(App.class.getResource("/upse/facturacion/vistas/Clientes.fxml"), bundle);
             Parent root = loader.load();
             ClientesController controlador = loader.getController();
-            controlador.recuperarCliente(id);
+            // controlador.recuperarCliente(id);
             Scene scene = new Scene(root);
             Stage mystage = new Stage();
             mystage.initModality(Modality.APPLICATION_MODAL);
@@ -162,14 +172,14 @@ public class ClienteController implements Initializable {
             if (event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() == 2) {
                 Cliente objSeleccionado = this.tbl_clientes.getSelectionModel().getSelectedItem();
                 if (objSeleccionado != null) {
-                    this.abrirModal(objSeleccionado.getCedula());
+                    this.abrirModal(String.valueOf(objSeleccionado.getCli_id()));
                 }
             }
         } catch (Exception e) {
         }
     }
 
-    private void filtrarTabla(String criterio) {
+    /*private void filtrarTabla(String criterio) {
         tbl_clientes.getItems().clear();
         if (criterio == null || criterio.trim().isEmpty()) {
             tbl_clientes.getItems().addAll(BD.listaClientes);
@@ -186,5 +196,5 @@ public class ClienteController implements Initializable {
                 }
             }
         }
-    }
+    }*/
 }

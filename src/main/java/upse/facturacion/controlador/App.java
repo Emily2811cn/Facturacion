@@ -12,6 +12,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import upse.facturacion.general.BD;
 import upse.facturacion.general.Mod_general;
 
 public class App extends Application {
@@ -20,6 +21,14 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
+        
+        BD bd=new BD();
+        if(bd.conectarBD()){
+            System.out.println("Se conecto con exito");
+        }else{
+            System.out.println("error al conectar");
+            return;
+        }
         confirmarSalida(stage);
 
         // Cargar Login CON bundle desde el inicio para que %clave funcione

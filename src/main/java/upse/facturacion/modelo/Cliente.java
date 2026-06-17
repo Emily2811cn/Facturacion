@@ -9,59 +9,89 @@ package upse.facturacion.modelo;
  * @author EMILY CRUZ
  */
 public class Cliente {
-    private String cedula;
-    private String nombres;
-    private String telefono;
-    private String email;
-    private String direccion;
 
-    public Cliente(String cedula, String nombres, String telefono, String email, String direccion) {
-        this.cedula = cedula;
-        this.nombres = nombres;
-        this.telefono = telefono;
-        this.email = email;
-        this.direccion = direccion;
+    private int cli_id;
+    private String cli_cedula;
+    private String cli_nombres;
+    private String cli_apellidos;
+    private String cli_direccion;
+    private String cli_telefono;
+    private String cli_correo;
+    private String cli_estado;
+
+    public Cliente(int cli_id, String cli_cedula, String cli_nombres, String cli_apellidos, String cli_direccion, String cli_telefono, String cli_correo, String cli_estado) {
+        this.cli_id = cli_id;
+        this.cli_cedula = cli_cedula;
+        this.cli_nombres = cli_nombres;
+        this.cli_apellidos = cli_apellidos;
+        this.cli_direccion = cli_direccion;
+        this.cli_telefono = cli_telefono;
+        this.cli_correo = cli_correo;
+        this.cli_estado = cli_estado;
     }
 
-    public String getCedula() {
-        return cedula;
+    public int getCli_id() {
+        return cli_id;
     }
 
-    public void setCedula(String cedula) {
-        this.cedula = cedula;
+    public void setCli_id(int cli_id) {
+        this.cli_id = cli_id;
     }
 
-    public String getNombres() {
-        return nombres;
+    public String getCli_cedula() {
+        return cli_cedula;
     }
 
-    public void setNombres(String nombres) {
-        this.nombres = nombres;
+    public void setCli_cedula(String cli_cedula) {
+        this.cli_cedula = cli_cedula;
     }
 
-    public String getTelefono() {
-        return telefono;
+    public String getCli_nombres() {
+        return cli_nombres;
     }
 
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
+    public void setCli_nombres(String cli_nombres) {
+        this.cli_nombres = cli_nombres;
     }
 
-    public String getEmail() {
-        return email;
+    public String getCli_apellidos() {
+        return cli_apellidos;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setCli_apellidos(String cli_apellidos) {
+        this.cli_apellidos = cli_apellidos;
     }
 
-    public String getDireccion() {
-        return direccion;
+    public String getCli_direccion() {
+        return cli_direccion;
     }
 
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
+    public void setCli_direccion(String cli_direccion) {
+        this.cli_direccion = cli_direccion;
     }
 
-    
+    public String getCli_telefono() {
+        return cli_telefono;
+    }
+
+    public void setCli_telefono(String cli_telefono) {
+        this.cli_telefono = cli_telefono;
+    }
+
+    public String getCli_correo() {
+        return cli_correo;
+    }
+
+    public void setCli_correo(String cli_correo) {
+        this.cli_correo = cli_correo;
+    }
+
+    public String getCli_estado() {
+        return cli_estado;
+    }
+
+    public void setCli_estado(String cli_estado) {
+        this.cli_estado = cli_estado;
+    }
 }
+    

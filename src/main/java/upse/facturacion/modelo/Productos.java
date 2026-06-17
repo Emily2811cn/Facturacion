@@ -4,19 +4,17 @@
  */
 package upse.facturacion.modelo;
 
-/**
- *
- * @author EMILY CRUZ
- */
 public class Productos {
+
     private String nombre;
     private String categoria;
-    private double precio;
+    private double precio;       // usar double
     private String presentacion;
     private String descripcion;
     private String codigo;
 
-    public Productos(String nombre, String categoria, double precio, String presentacion, String descripcion, String codigo) {
+    public Productos(String nombre, String categoria, double precio,
+            String presentacion, String descripcion, String codigo) {
         this.nombre = nombre;
         this.categoria = categoria;
         this.precio = precio;
@@ -72,6 +70,4 @@ public class Productos {
     public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
-    
-    
 }

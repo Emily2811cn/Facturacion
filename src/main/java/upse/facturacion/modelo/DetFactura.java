@@ -4,21 +4,19 @@
  */
 package upse.facturacion.modelo;
 
-/**
- *
- * @author EMILY CRUZ
- */
 public class DetFactura {
 
     private String codigo;
     private String prod_nombre;
-    private float cantidad;
-    private float precio;
+    private Float cantidad;      // editable en la tabla
+    private double precio;       // mismo tipo que Productos
     private boolean aplicaIva;
-    private float total;
-    private float subtotal;
+    private double total;        // usar double
+    private double subtotal;     // usar double
 
-    public DetFactura(String codigo, String prod_nombre, float cantidad, float precio, boolean aplicaIva, float total, float subtotal) {
+    public DetFactura(String codigo, String prod_nombre, Float cantidad,
+            double precio, boolean aplicaIva,
+            double total, double subtotal) {
         this.codigo = codigo;
         this.prod_nombre = prod_nombre;
         this.cantidad = cantidad;
@@ -44,19 +42,19 @@ public class DetFactura {
         this.prod_nombre = prod_nombre;
     }
 
-    public float getCantidad() {
+    public Float getCantidad() {
         return cantidad;
     }
 
-    public void setCantidad(float cantidad) {
+    public void setCantidad(Float cantidad) {
         this.cantidad = cantidad;
     }
 
-    public float getPrecio() {
+    public double getPrecio() {
         return precio;
     }
 
-    public void setPrecio(float precio) {
+    public void setPrecio(double precio) {
         this.precio = precio;
     }
 
@@ -68,21 +66,19 @@ public class DetFactura {
         this.aplicaIva = aplicaIva;
     }
 
-    public float getTotal() {
+    public double getTotal() {
         return total;
     }
 
-    public void setTotal(float total) {
+    public void setTotal(double total) {
         this.total = total;
     }
 
-    public float getSubtotal() {
+    public double getSubtotal() {
         return subtotal;
     }
 
-    public void setSubtotal(float subtotal) {
+    public void setSubtotal(double subtotal) {
         this.subtotal = subtotal;
     }
-    
-    
 }

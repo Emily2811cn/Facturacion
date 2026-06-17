@@ -16,7 +16,10 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import upse.facturacion.MAD.Mad_Seguridad;
+import static upse.facturacion.general.Mod_VariablesGlobales.g_nombreUsuario;
 import upse.facturacion.general.Mod_general;
+import upse.facturacion.modelo.Usuario;
 
 public class LoginController implements Initializable {
 
@@ -130,6 +133,23 @@ public class LoginController implements Initializable {
     }
 
     public boolean fun_validar(String usuario, String clave) {
-        return usuario.equals("admin") && clave.equals("123");
+                try {
+            if (usuario == null || usuario.trim().isEmpty()) {
+                return false;
+            }
+            if (clave == null || clave.trim().isEmpty()) {
+                return false;
+            }
+            Mad_Seguridad madSeguridad = new Mad_Seguridad();
+            Usuario usu = madSeguridad.login(usuario, clave);
+            if (usu == null) {
+                return false;
+            }
+            //System.out.println("NOMBRE: "+usu=getUsr_nombres());
+            g_nombreUsuario=usu.getUsr_nombres();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 }

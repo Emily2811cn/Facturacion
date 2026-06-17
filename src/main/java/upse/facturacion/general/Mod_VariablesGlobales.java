@@ -39,4 +39,5 @@ public class Mod_VariablesGlobales {
         return hoy.format(formato);
 
     }
+    public static String g_nombreUsuario;
 }
