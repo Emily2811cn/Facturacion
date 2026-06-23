@@ -8,7 +8,7 @@ public class Productos {
 
     private String nombre;
     private String categoria;
-    private double precio;       // usar double
+    private double precio;   
     private String presentacion;
     private String descripcion;
     private String codigo;

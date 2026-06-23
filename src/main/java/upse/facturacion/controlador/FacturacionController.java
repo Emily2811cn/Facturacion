@@ -110,7 +110,7 @@ public class FacturacionController implements Initializable {
                 buscarYLlenarCliente();
             }
         });
-        detallefac.add(new DetFactura("", "", 0f, 0.0, false, 0.0, 0.0));
+        detallefac.add(new DetFactura(0, "", "", 0f, 0.0, false, 0.0, 0.0));
         tbl_detalle.setItems(detallefac);
 
     }
@@ -217,7 +217,7 @@ public class FacturacionController implements Initializable {
     @FXML
     private void acc_grabar(ActionEvent event) {
         String cedula = txt_documento.getText().trim();
-       //Cliente cliente = BD.recuperarCliente(cedula);
+        //Cliente cliente = BD.recuperarCliente(cedula);
 
         /*if (cliente == null) {
             cliente = new Cliente(cedula, txt_nombres.getText(), txt_telefono.getText(),
@@ -229,7 +229,6 @@ public class FacturacionController implements Initializable {
             cliente.setEmail(txt_email.getText());
             cliente.setDireccion(txt_direccion.getText());
         }*/
-
         float subtotal = 0, subtotalCero = 0, iva = 0, total = 0;
         for (DetFactura det : detalleFactura) {
             if (det.isAplicaIva()) {
@@ -242,10 +241,19 @@ public class FacturacionController implements Initializable {
         total = subtotal + subtotalCero + iva;
 
         CabFactura factura = new CabFactura(
-                Integer.parseInt(txt_numFactura.getText()), txt_fecha.getText(),
-                cedula, txt_nombres.getText(), txt_direccion.getText(),
-                txt_telefono.getText(), txt_email.getText(), detalleFactura,
-                subtotal, subtotalCero, iva, total
+                0, // fac_id (nuevo, aún sin ID)
+                Integer.parseInt(txt_numFactura.getText()), // numFactura
+                txt_fecha.getText(), // fecha
+                0, // cli_id (puedes asignarlo si lo tienes)
+                cedula, // numdocumento
+                txt_nombres.getText(), // nombres
+                "", // apellidos (no hay campo en la vista)
+                txt_direccion.getText(), // direccion
+                txt_telefono.getText(), // telefono
+                txt_email.getText(), // email
+                detalleFactura, // detallefactura
+                subtotal, subtotalCero, iva, total, // totales
+                "ACTIVA" // estado
         );
 
         //BD.guardarFactura(factura);
@@ -298,30 +306,28 @@ public class FacturacionController implements Initializable {
     }
 
     public void configurarTabla() {
-    tbl_detalle.setEditable(true);
+        tbl_detalle.setEditable(true);
 
-    col_codigo.setCellValueFactory(new PropertyValueFactory<>("codigo"));
-    col_descripcion.setCellValueFactory(new PropertyValueFactory<>("prod_nombre"));
-    col_cantidad.setCellValueFactory(new PropertyValueFactory<>("cantidad"));
-    col_pvp.setCellValueFactory(new PropertyValueFactory<>("precio"));
-    col_subtotal.setCellValueFactory(new PropertyValueFactory<>("subtotal"));
-    col_aplicaiva.setCellValueFactory(new PropertyValueFactory<>("aplicaIva"));
-    col_total.setCellValueFactory(new PropertyValueFactory<>("total"));
+        col_codigo.setCellValueFactory(new PropertyValueFactory<>("codigo"));
+        col_descripcion.setCellValueFactory(new PropertyValueFactory<>("prod_nombre"));
+        col_cantidad.setCellValueFactory(new PropertyValueFactory<>("cantidad"));
+        col_pvp.setCellValueFactory(new PropertyValueFactory<>("precio"));
+        col_subtotal.setCellValueFactory(new PropertyValueFactory<>("subtotal"));
+        col_aplicaiva.setCellValueFactory(new PropertyValueFactory<>("aplicaIva"));
+        col_total.setCellValueFactory(new PropertyValueFactory<>("total"));
 
-    // Código (String)
-    col_codigo.setCellFactory(TextFieldTableCell.forTableColumn());
-    col_codigo.setOnEditCommit(event -> event.getRowValue().setCodigo(event.getNewValue()));
+        // Código (String)
+        col_codigo.setCellFactory(TextFieldTableCell.forTableColumn());
+        col_codigo.setOnEditCommit(event -> event.getRowValue().setProd_cod(event.getNewValue()));
 
-    // Descripción (String)
-    col_descripcion.setCellFactory(TextFieldTableCell.forTableColumn());
-    col_descripcion.setOnEditCommit(event -> event.getRowValue().setProd_nombre(event.getNewValue()));
+        // Descripción (String)
+        col_descripcion.setCellFactory(TextFieldTableCell.forTableColumn());
+        col_descripcion.setOnEditCommit(event -> event.getRowValue().setProd_nombre(event.getNewValue()));
 
-    // Cantidad (Float)
-    col_cantidad.setCellFactory(TextFieldTableCell.forTableColumn(new FloatStringConverter()));
-    col_cantidad.setOnEditCommit(event -> event.getRowValue().setCantidad(event.getNewValue()));
+        // Cantidad (Float)
+        col_cantidad.setCellFactory(TextFieldTableCell.forTableColumn(new FloatStringConverter()));
+        col_cantidad.setOnEditCommit(event -> event.getRowValue().setCantidad(event.getNewValue()));
 
-
-}
-
+    }
 
 }

@@ -78,4 +78,32 @@ public class Mad_Clientes {
 
         return cli;
     }
+    public boolean mantCliente(Cliente objcliente){
+        String cadenaSQL="";
+       	cadenaSQL = cadenaSQL + "EXEC sp_mantCliente " ;
+        cadenaSQL = cadenaSQL + objcliente.getCli_id()+",";
+        cadenaSQL = cadenaSQL + "'"+objcliente.getCli_cedula()+"',";
+        cadenaSQL = cadenaSQL + "'"+objcliente.getCli_nombres()+"',";
+        cadenaSQL = cadenaSQL + "'"+objcliente.getCli_apellidos()+"',";
+        cadenaSQL = cadenaSQL + "'"+objcliente.getCli_direccion()+"',";
+        cadenaSQL = cadenaSQL + "'"+objcliente.getCli_telefono()+"',";
+        cadenaSQL = cadenaSQL + "'"+objcliente.getCli_correo()+"',";
+        cadenaSQL = cadenaSQL + "'"+objcliente.getCli_estado()+"'";
+        
+        System.out.println("cadenaSql");
+        try {
+            bd.conectarBD();
+            bd.iniciarTransaccion();
+            int filas=bd.ejecutarSQL(cadenaSQL);
+            return filas>0;
+        } catch (Exception e) {
+            bd.rollback();
+            return false;
+        }finally{
+            bd.desconectarBD();
+        }
+    }
+    
+    
+    
 }//fin clase

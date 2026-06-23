@@ -54,9 +54,19 @@ public class ClientesController implements Initializable {
 
     private ResourceBundle bundle;
     int bandera;
-    Mad_Clientes madCliente=new Mad_Clientes();
+    Mad_Clientes madCliente = new Mad_Clientes();
+
+    @FXML
+    private CheckBox chk_estado;
+    @FXML
+    private TextField txt_apellido;
+    @FXML
+    private Text lbl_apellidos_field;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        this.chk_estado.setSelected(true);
+
         this.bundle = (rb != null) ? rb : Mod_general.getBundle();
 
         // Aplicar traducciones a nodos Text
@@ -120,6 +130,9 @@ public class ClientesController implements Initializable {
             if (chk_validarCedula != null) {
                 chk_validarCedula.setText(t("lbl_validar", "Validar"));
             }
+            if (lbl_tituloClientes != null) {
+                lbl_tituloClientes.setText(t("clientes.titulo", "CLIENTES"));
+            }
         } catch (Exception e) {
             // ignorar
         }
@@ -137,28 +150,35 @@ public class ClientesController implements Initializable {
     private void acc_guardarCliente(ActionEvent event) {
         try {
             if (!fun_validar()) {
-                return;
+                return; // ← agregar validación
             }
-            if (bandera == 0) {
-               /* Cliente obj = new Cliente(
-                        txt_cedula.getText(),
-                        txt_nombreCliente.getText(),
-                        txt_telefono.getText(),
-                        txt_email.getText(),
-                        txt_direccion.getText()
-                );*/
-                //BD.listaClientes.add(obj);
+            String estado = this.chk_estado.isSelected() ? "A" : "E";
+
+            Cliente obj = new Cliente(
+                    this.bandera, // 0 = insert, >0 = update
+                    this.txt_cedula.getText(),
+                    this.txt_nombreCliente.getText(),
+                    this.txt_apellido.getText(),
+                    this.txt_direccion.getText(),
+                    this.txt_telefono.getText(),
+                    this.txt_email.getText(),
+                    estado
+            );
+
+            if (this.madCliente.mantCliente(obj)) {
+                Mod_general.fun_mensajeInformacion(
+                        bandera == 0 ? "Se registró con éxito" : "Se actualizó con éxito"
+                );
             } else {
-                /*Cliente objCliente = fun_retornaCliente(txt_cedula.getText());
-                if (objCliente != null) {
-                    objCliente.setNombres(txt_nombreCliente.getText());
-                    objCliente.setTelefono(txt_telefono.getText());
-                    objCliente.setEmail(txt_email.getText());
-                    objCliente.setDireccion(txt_direccion.getText());
-                }*/
+                Mod_general.fun_mensajeError(
+                        bandera == 0 ? "Error al registrar" : "Error al actualizar"
+                );
+                return; // ← no cerrar si falló
             }
-            //cerrarFormulario();
+
+            this.cerrarFormulario();
         } catch (Exception e) {
+            Mod_general.fun_mensajeError(e.getMessage());
         }
     }
 
@@ -211,6 +231,7 @@ public class ClientesController implements Initializable {
     }
 
     public void recuperarCliente(String id) {
+
         if (id.equals("")) {
             bandera = 0;
             fun_limpiar();
@@ -223,15 +244,23 @@ public class ClientesController implements Initializable {
     private void recuperarcliente(String id) {
         Cliente objCliente = this.madCliente.buscaClientexId(Integer.parseInt(id));
         if (objCliente != null) {
+            this.bandera = objCliente.getCli_id();
             this.txt_cedula.setText(objCliente.getCli_cedula());
             this.txt_nombreCliente.setText(objCliente.getCli_nombres());
+            this.txt_apellido.setText(objCliente.getCli_apellidos());
             this.txt_direccion.setText(objCliente.getCli_direccion());
             this.txt_telefono.setText(objCliente.getCli_telefono());
             this.txt_email.setText(objCliente.getCli_correo());
+            String estado = "A";
+            if (objCliente.getCli_estado().equalsIgnoreCase(estado)) {
+                System.out.println("ok0");
+                this.chk_estado.setSelected(true);
+            } else {
+                System.out.println("ok1");
+                this.chk_estado.setSelected(false);
+            }
         }
     }
-
-   
 
     @FXML
     private void acc_cerrar(ActionEvent event) {

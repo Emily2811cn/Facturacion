@@ -6,32 +6,46 @@ package upse.facturacion.modelo;
 
 public class DetFactura {
 
-    private String codigo;
+    private int fac_id;
+    private String prod_cod;
     private String prod_nombre;
     private Float cantidad;      // editable en la tabla
     private double precio;       // mismo tipo que Productos
     private boolean aplicaIva;
-    private double total;        // usar double
     private double subtotal;     // usar double
 
-    public DetFactura(String codigo, String prod_nombre, Float cantidad,
-            double precio, boolean aplicaIva,
-            double total, double subtotal) {
-        this.codigo = codigo;
+    private double total;        // usar double
+
+    public DetFactura() {
+        //this.cantidad=1;
+    }
+
+    public DetFactura(int fac_id, String prod_cod, String prod_nombre, Float cantidad, double precio, boolean aplicaIva, double subtotal, double total) {
+        this.fac_id = fac_id;
+        this.prod_cod = prod_cod;
         this.prod_nombre = prod_nombre;
         this.cantidad = cantidad;
         this.precio = precio;
         this.aplicaIva = aplicaIva;
-        this.total = total;
         this.subtotal = subtotal;
+        this.total = total;
+        
     }
 
-    public String getCodigo() {
-        return codigo;
+    public int getFac_id() {
+        return fac_id;
     }
 
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
+    public void setFac_id(int fac_id) {
+        this.fac_id = fac_id;
+    }
+
+    public String getProd_cod() {
+        return prod_cod;
+    }
+
+    public void setProd_cod(String prod_cod) {
+        this.prod_cod = prod_cod;
     }
 
     public String getProd_nombre() {
@@ -66,6 +80,14 @@ public class DetFactura {
         this.aplicaIva = aplicaIva;
     }
 
+    public double getSubtotal() {
+        return subtotal;
+    }
+
+    public void setSubtotal(double subtotal) {
+        this.subtotal = subtotal;
+    }
+
     public double getTotal() {
         return total;
     }
@@ -74,11 +96,5 @@ public class DetFactura {
         this.total = total;
     }
 
-    public double getSubtotal() {
-        return subtotal;
-    }
 
-    public void setSubtotal(double subtotal) {
-        this.subtotal = subtotal;
-    }
 }

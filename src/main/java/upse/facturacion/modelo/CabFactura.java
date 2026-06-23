@@ -10,10 +10,13 @@ import java.util.ArrayList;
  * @author EMILY CRUZ
  */
 public class CabFactura {
+    private int fac_id;
     private int numFactura;
     private String fecha;
-    private String numDocumento;
+    private int cli_id;
+    private String numdocumento;
     private String nombres;
+    private String apellidos;
     private String direccion;
     private String telefono;
     private String email;
@@ -23,12 +26,19 @@ public class CabFactura {
     private float subtotalcero;
     private float iva;
     private float total;
+    private String estado;
+//aqui va lo de la clave de autorizacion de la factura 
+    public CabFactura() {
+    }
 
-    public CabFactura(int numFactura, String fecha, String numDocumento, String nombres, String direccion, String telefono, String email, ArrayList<DetFactura> detallefactura, float subtotal, float subtotalcero, float iva, float total) {
+    public CabFactura(int fac_id, int numFactura, String fecha, int cli_id, String numdocumento, String nombres, String apellidos, String direccion, String telefono, String email, ArrayList<DetFactura> detallefactura, float subtotal, float subtotalcero, float iva, float total, String estado) {
+        this.fac_id = fac_id;
         this.numFactura = numFactura;
         this.fecha = fecha;
-        this.numDocumento = numDocumento;
+        this.cli_id = cli_id;
+        this.numdocumento = numdocumento;
         this.nombres = nombres;
+        this.apellidos = apellidos;
         this.direccion = direccion;
         this.telefono = telefono;
         this.email = email;
@@ -37,6 +47,15 @@ public class CabFactura {
         this.subtotalcero = subtotalcero;
         this.iva = iva;
         this.total = total;
+        this.estado = estado;
+    }
+
+    public int getFac_id() {
+        return fac_id;
+    }
+
+    public void setFac_id(int fac_id) {
+        this.fac_id = fac_id;
     }
 
     public int getNumFactura() {
@@ -55,12 +74,20 @@ public class CabFactura {
         this.fecha = fecha;
     }
 
-    public String getNumDocumento() {
-        return numDocumento;
+    public int getCli_id() {
+        return cli_id;
     }
 
-    public void setNumDocumento(String numDocumento) {
-        this.numDocumento = numDocumento;
+    public void setCli_id(int cli_id) {
+        this.cli_id = cli_id;
+    }
+
+    public String getNumdocumento() {
+        return numdocumento;
+    }
+
+    public void setNumdocumento(String numdocumento) {
+        this.numdocumento = numdocumento;
     }
 
     public String getNombres() {
@@ -69,6 +96,14 @@ public class CabFactura {
 
     public void setNombres(String nombres) {
         this.nombres = nombres;
+    }
+
+    public String getApellidos() {
+        return apellidos;
+    }
+
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
     }
 
     public String getDireccion() {
@@ -135,6 +170,14 @@ public class CabFactura {
         this.total = total;
     }
 
-   
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+ 
     
 }

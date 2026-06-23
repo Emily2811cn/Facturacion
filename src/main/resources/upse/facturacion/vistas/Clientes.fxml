@@ -35,7 +35,7 @@
                         <Bloom threshold="0.82" />
                      </effect>
                   </Pane>
-                  <Button fx:id="btn_cerrar" layoutX="341.0" layoutY="332.0" mnemonicParsing="false" onAction="#acc_cerrar" prefHeight="32.0" prefWidth="95.0" style="-fx-background-color: EBD5D1;" text="%clientes.btn.cancelar">
+                  <Button fx:id="btn_cerrar" layoutX="348.0" layoutY="332.0" mnemonicParsing="false" onAction="#acc_cerrar" prefHeight="32.0" prefWidth="95.0" style="-fx-background-color: EBD5D1;" text="%clientes.btn.cancelar">
                      <graphic>
                         <ImageView fitHeight="21.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -52,10 +52,10 @@
                   </Text>
                   <Line endX="433.60003662109375" endY="9.199996948242188" layoutX="127.0" layoutY="96.0" opacity="0.21" startX="-65.59999084472656" startY="9.199996948242188" />
                   <Text fx:id="lbl_telefono" layoutX="72.0" layoutY="212.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%lbl_telefono_field" />
-                  <Text fx:id="lbl_nombres" layoutX="71.0" layoutY="168.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%lbl_nombres_field" />
+                  <Text fx:id="lbl_nombres" layoutX="69.0" layoutY="156.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%lbl_nombres_field" />
                   <Text fx:id="lbl_email" layoutX="78.0" layoutY="248.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%lbl_email_field" />
                   <Text fx:id="lbl_direccion" layoutX="71.0" layoutY="282.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%lbl_direccion_field" />
-                  <Text fx:id="lbl_cedula" layoutX="77.0" layoutY="134.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%lbl_cedula_field" />
+                  <Text fx:id="lbl_cedula" layoutX="75.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%lbl_cedula_field" />
                   <Line endX="433.60003662109375" endY="9.199996948242188" layoutX="126.0" layoutY="314.0" opacity="0.2" startX="-65.59999084472656" startY="9.199996948242188" />
                   <Button fx:id="btn_guardarCliente" layoutX="149.0" layoutY="332.0" mnemonicParsing="false" onAction="#acc_guardarCliente" prefHeight="32.0" prefWidth="157.0" style="-fx-background-color: E0A399;" text="%clientes.btn.guardar">
                      <graphic>
@@ -66,12 +66,15 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <TextField fx:id="txt_cedula" layoutX="142.0" layoutY="117.0" prefHeight="25.0" prefWidth="171.0" />
+                  <TextField fx:id="txt_cedula" layoutX="142.0" layoutY="108.0" prefHeight="25.0" prefWidth="171.0" />
                   <TextField fx:id="txt_direccion" layoutX="136.0" layoutY="269.0" prefHeight="43.0" prefWidth="373.0" />
-                  <TextField fx:id="txt_nombreCliente" layoutX="139.0" layoutY="151.0" prefHeight="25.0" prefWidth="367.0" />
+                  <TextField fx:id="txt_nombreCliente" layoutX="149.0" layoutY="139.0" prefHeight="25.0" prefWidth="367.0" />
                   <TextField fx:id="txt_email" layoutX="139.0" layoutY="231.0" prefHeight="25.0" prefWidth="367.0" />
-                  <TextField fx:id="txt_telefono" layoutX="139.0" layoutY="195.0" prefHeight="25.0" prefWidth="213.0" />
+                  <TextField fx:id="txt_telefono" layoutX="149.0" layoutY="195.0" prefHeight="25.0" prefWidth="213.0" />
                   <CheckBox fx:id="chk_validarCedula" layoutX="341.0" layoutY="121.0" mnemonicParsing="false" text="%lbl_validar" />
+                  <Text fx:id="lbl_apellidos_field" layoutX="69.0" layoutY="184.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%lbl_apellidos_field" />
+                  <TextField fx:id="txt_apellido" layoutX="149.0" layoutY="167.0" prefHeight="25.0" prefWidth="367.0" />
+                  <CheckBox fx:id="chk_estado" layoutX="436.0" layoutY="75.0" mnemonicParsing="false" text="%lbl_Estado" />
                </children>
             </Pane>
          </children>
