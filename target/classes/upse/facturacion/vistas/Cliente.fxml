@@ -27,7 +27,7 @@
                   </ImageView>
                   <Pane layoutX="122.0" layoutY="33.0" prefHeight="32.0" prefWidth="202.0" style="-fx-background-color: E0B9B1;">
                      <children>
-                        <Text fx:id="lbl_tituloBuscar" fill="WHITE" layoutX="22.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%clientes.buscar">
+                        <Text fx:id="lbl_tituloBuscar" fill="WHITE" layoutX="22.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%clientes.titulo.buscar">
                            <font>
                               <Font name="Times New Roman" size="18.0" />
                            </font>

@@ -15,4 +15,5 @@ upse\facturacion\modelo\CabFactura.class
 upse\facturacion\general\Mod_VariablesGlobales.class
 upse\facturacion\general\BD.class
 upse\facturacion\controlador\ClientesController.class
+upse\facturacion\MAD\Mad_Productos.class
 upse\facturacion\modelo\Cliente.class

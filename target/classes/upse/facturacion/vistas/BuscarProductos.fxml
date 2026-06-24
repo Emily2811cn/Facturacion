@@ -1,26 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/25" fx:controller="upse.facturacion.controlador.BuscarProductosController">
+<AnchorPane id="AnchorPane" fx:id="dataPaneProducto" prefHeight="400.0" prefWidth="706.0" style="-fx-background-color: FAECE8;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="upse.facturacion.controlador.BuscarProductosController">
    <children>
-      <Pane prefHeight="57.0" prefWidth="898.0" style="-fx-background-color: DECFCC;">
+      <Pane layoutX="35.0" layoutY="14.0" prefHeight="58.0" prefWidth="636.0" style="-fx-background-color: E0B9B1;">
          <children>
-            <Text layoutX="309.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BUSCAR PRODUCTOS">
+            <Text layoutX="197.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BUSCAR PRODUCTOS">
                <font>
                   <Font name="Californian FB" size="28.0" />
                </font>
             </Text>
          </children>
       </Pane>
-      <Text layoutX="115.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CÓDIGO:" />
-      <Text layoutX="108.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" text="NOMBRES: " />
-      <TextField layoutX="206.0" layoutY="76.0" prefHeight="26.0" prefWidth="171.0" />
-      <TextField layoutX="206.0" layoutY="111.0" prefHeight="26.0" prefWidth="455.0" />
+      <TextField fx:id="txt_buscarProducto" layoutX="267.0" layoutY="88.0" prefHeight="33.0" prefWidth="374.0" />
+      <RadioButton fx:id="rad_codigo" layoutX="62.0" layoutY="96.0" mnemonicParsing="false" text="Código" />
+      <RadioButton fx:id="rad_nombre" layoutX="169.0" layoutY="96.0" mnemonicParsing="false" text="Nombre" />
+      <TableView fx:id="tbl_productos" layoutX="47.0" layoutY="140.0" onMouseClicked="#acc_Clickedmause" prefHeight="183.0" prefWidth="630.0">
+        <columns>
+          <TableColumn fx:id="col_codigo" prefWidth="122.40002822875977" text="CÓDIGO" />
+          <TableColumn fx:id="col_nombre" prefWidth="220.7999725341797" text="NOMBRE " />
+            <TableColumn fx:id="col_stock" prefWidth="107.20001220703125" text="STOCK" />
+            <TableColumn fx:id="col_precio" minWidth="0.0" prefWidth="134.39996337890625" text="PRECIO " />
+            <TableColumn fx:id="col_precioMayor" prefWidth="11.19989013671875" text="PRECIO/MAYOR" visible="false" />
+            <TableColumn fx:id="col_precioMenor" prefWidth="12.79998779296875" text="PRECIO/MENOR" visible="false" />
+            <TableColumn fx:id="col_iva" prefWidth="11.20001220703125" text="APLICA IVA" visible="false" />
+            <TableColumn fx:id="col_estado" prefWidth="11.20001220703125" text="ESTADO" visible="false" />
+        </columns>
+      </TableView>
+      <Button fx:id="btn_nuevoProd" layoutX="166.0" layoutY="341.0" mnemonicParsing="false" onAction="#acc_nuevo" prefHeight="34.0" prefWidth="177.0" style="-fx-background-color: E0A399;" text="Nuevo Producto">
+         <graphic>
+            <ImageView fitHeight="26.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../recursos/productos.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
+      <Button fx:id="btn_cerrar" layoutX="444.0" layoutY="342.0" mnemonicParsing="false" onAction="#acc_cerrar" prefHeight="32.0" prefWidth="130.0" style="-fx-background-color: EBD5D1;" text="%clientes.btn.cancelar">
+         <graphic>
+            <ImageView fitHeight="21.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../recursos/error.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
    </children>
 </AnchorPane>

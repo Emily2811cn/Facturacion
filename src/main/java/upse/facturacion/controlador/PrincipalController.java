@@ -86,7 +86,7 @@ public class PrincipalController implements Initializable {
 
     @FXML
     private void acc_productos(ActionEvent event) throws IOException {
-        setDataPane(funAnimacion(DIRVISTAS + "Producto.fxml"));
+        setDataPane(funAnimacion(DIRVISTAS + "BuscarProductos.fxml"));
     }
 
     @FXML
