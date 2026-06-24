@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.TilePane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/25" fx:controller="upse.facturacion.controlador.ProductosImagenesController">
+   <children>
+      <AnchorPane id="AnchorPane" fx:id="dataPaneProducto" prefHeight="410.0" prefWidth="716.0" style="-fx-background-color: FAECE8;">
+         <children>
+            <Pane layoutX="40.0" prefHeight="44.0" prefWidth="602.0" style="-fx-background-color: E0B9B1;">
+               <children>
+                  <Text layoutX="187.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BUSCAR PRODUCTOS">
+                     <font>
+                        <Font name="Californian FB" size="28.0" />
+                     </font>
+                  </Text>
+               </children>
+            </Pane>
+            <TextField fx:id="txt_buscarProducto" layoutX="267.0" layoutY="55.0" prefHeight="33.0" prefWidth="374.0" />
+            <RadioButton fx:id="rad_codigo" layoutX="75.0" layoutY="63.0" mnemonicParsing="false" text="Código" />
+            <RadioButton fx:id="rad_nombre" layoutX="177.0" layoutY="63.0" mnemonicParsing="false" text="Nombre" />
+            <Button fx:id="btn_cerrar" layoutX="654.0" layoutY="14.0" mnemonicParsing="false" onAction="#acc_cerrar" prefHeight="32.0" prefWidth="33.0" style="-fx-background-color: EBD5D1;" text="%clientes.btn.cancelar">
+               <graphic>
+                  <ImageView fitHeight="21.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../recursos/error.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <ScrollPane fx:id="scroll_prod" layoutX="35.0" layoutY="98.0" prefHeight="290.0" prefWidth="646.0">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <TilePane fx:id="tilepane_prod" layoutX="6.0" layoutY="4.0" prefHeight="274.0" prefWidth="630.0" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </ScrollPane>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

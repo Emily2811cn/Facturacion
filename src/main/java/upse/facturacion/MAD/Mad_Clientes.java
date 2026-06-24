@@ -9,7 +9,6 @@ import javafx.collections.ObservableList;
 import upse.facturacion.general.BD;
 import upse.facturacion.modelo.Cliente;
 import java.sql.ResultSet;
-import upse.facturacion.modelo.Usuario;
 
 /**
  *
@@ -48,16 +47,16 @@ public class Mad_Clientes {
     }
 
     //funcion que retorna un cliente por id 
-    public Cliente buscaClientexId(int id) {
-        Cliente cli = null;
-        String sql = "exec sp_selClientexid ?";
+    public Cliente recuperarClientePorCedula(String cedula) {
+        Cliente cliente = null;
+        String sql = "exec sp_selClientexCedula ?";
         try {
             bd.conectarBD();
             PreparedStatement ps = bd.getConexion().prepareStatement(sql);
-            ps.setInt(1, id);
+            ps.setString(1, cedula);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                cli = new Cliente(
+                cliente = new Cliente(
                         rs.getInt("cli_id"),
                         rs.getString("cli_cedula"),
                         rs.getString("cli_nombres"),
@@ -73,37 +72,36 @@ public class Mad_Clientes {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            bd.conectarBD();
+            bd.desconectarBD();
         }
 
-        return cli;
+        return cliente;
     }
-    public boolean mantCliente(Cliente objcliente){
-        String cadenaSQL="";
-       	cadenaSQL = cadenaSQL + "EXEC sp_mantCliente " ;
-        cadenaSQL = cadenaSQL + objcliente.getCli_id()+",";
-        cadenaSQL = cadenaSQL + "'"+objcliente.getCli_cedula()+"',";
-        cadenaSQL = cadenaSQL + "'"+objcliente.getCli_nombres()+"',";
-        cadenaSQL = cadenaSQL + "'"+objcliente.getCli_apellidos()+"',";
-        cadenaSQL = cadenaSQL + "'"+objcliente.getCli_direccion()+"',";
-        cadenaSQL = cadenaSQL + "'"+objcliente.getCli_telefono()+"',";
-        cadenaSQL = cadenaSQL + "'"+objcliente.getCli_correo()+"',";
-        cadenaSQL = cadenaSQL + "'"+objcliente.getCli_estado()+"'";
-        
+
+    public boolean mantCliente(Cliente objcliente) {
+        String cadenaSQL = "";
+        cadenaSQL = cadenaSQL + "EXEC sp_mantCliente ";
+        cadenaSQL = cadenaSQL + objcliente.getCli_id() + ",";
+        cadenaSQL = cadenaSQL + "'" + objcliente.getCli_cedula() + "',";
+        cadenaSQL = cadenaSQL + "'" + objcliente.getCli_nombres() + "',";
+        cadenaSQL = cadenaSQL + "'" + objcliente.getCli_apellidos() + "',";
+        cadenaSQL = cadenaSQL + "'" + objcliente.getCli_direccion() + "',";
+        cadenaSQL = cadenaSQL + "'" + objcliente.getCli_telefono() + "',";
+        cadenaSQL = cadenaSQL + "'" + objcliente.getCli_correo() + "',";
+        cadenaSQL = cadenaSQL + "'" + objcliente.getCli_estado() + "'";
+
         System.out.println("cadenaSql");
         try {
             bd.conectarBD();
             bd.iniciarTransaccion();
-            int filas=bd.ejecutarSQL(cadenaSQL);
-            return filas>0;
+            int filas = bd.ejecutarSQL(cadenaSQL);
+            return filas > 0;
         } catch (Exception e) {
             bd.rollback();
             return false;
-        }finally{
+        } finally {
             bd.desconectarBD();
         }
     }
-    
-    
-    
+
 }//fin clase

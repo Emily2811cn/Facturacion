@@ -230,19 +230,18 @@ public class ClientesController implements Initializable {
         txt_cedula.requestFocus();
     }
 
-    public void recuperarCliente(String id) {
-
-        if (id.equals("")) {
+    public void recuperarCliente(String cedula) {
+        if (cedula.equals("")) {
             bandera = 0;
             fun_limpiar();
         } else {
             bandera = 1;
-            recuperarcliente(id);
+            recuperarcliente(cedula); // ✅ ahora usa la cédula
         }
     }
 
-    private void recuperarcliente(String id) {
-        Cliente objCliente = this.madCliente.buscaClientexId(Integer.parseInt(id));
+    private void recuperarcliente(String cedula) {
+        Cliente objCliente = this.madCliente.recuperarClientePorCedula(cedula);
         if (objCliente != null) {
             this.bandera = objCliente.getCli_id();
             this.txt_cedula.setText(objCliente.getCli_cedula());
@@ -251,12 +250,10 @@ public class ClientesController implements Initializable {
             this.txt_direccion.setText(objCliente.getCli_direccion());
             this.txt_telefono.setText(objCliente.getCli_telefono());
             this.txt_email.setText(objCliente.getCli_correo());
-            String estado = "A";
-            if (objCliente.getCli_estado().equalsIgnoreCase(estado)) {
-                System.out.println("ok0");
+
+            if (objCliente.getCli_estado().equalsIgnoreCase("A")) {
                 this.chk_estado.setSelected(true);
             } else {
-                System.out.println("ok1");
                 this.chk_estado.setSelected(false);
             }
         }

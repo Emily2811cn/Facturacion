@@ -79,4 +79,8 @@ public class Mod_general {
             }
         });
     }
+    public static String formatearDosDecimales(double numero){
+        return String.format(Locale.US, "%.2f", numero);
+    }
+    
 }

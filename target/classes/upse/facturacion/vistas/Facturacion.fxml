@@ -49,11 +49,12 @@
         </Pane>
         <TableView fx:id="tbl_detalle" editable="true" layoutX="24.0" layoutY="233.0" prefHeight="275.0" prefWidth="830.0">
             <columns>
-                <TableColumn fx:id="col_codigo" prefWidth="69.59997177124023" text="%fac.col.codigo" editable="true"/>
-                <TableColumn fx:id="col_descripcion" prefWidth="260.8000030517578" text="%fac.col.descripcion" editable="true"/>
-                <TableColumn fx:id="col_cantidad" prefWidth="81.5999755859375" text="%fac.col.cantidad" editable="true"/>
-                <TableColumn fx:id="col_pvp" prefWidth="131.99993896484375" text="%fac.col.pvp" editable="true"/>
-                <TableColumn fx:id="col_subtotal" prefWidth="129.60003662109375" text="%fac.col.subtotal" editable="true"/>
+                <TableColumn fx:id="col_codigo" editable="true" prefWidth="69.59997177124023" text="%fac.col.codigo" />
+            <TableColumn fx:id="col_buscar" prefWidth="75.0" text="buscar" />
+                <TableColumn fx:id="col_descripcion" editable="true" prefWidth="260.8000030517578" text="%fac.col.descripcion" />
+                <TableColumn fx:id="col_cantidad" editable="true" prefWidth="81.5999755859375" text="%fac.col.cantidad" />
+                <TableColumn fx:id="col_pvp" editable="true" prefWidth="131.99993896484375" text="%fac.col.pvp" />
+                <TableColumn fx:id="col_subtotal" editable="true" prefWidth="129.60003662109375" text="%fac.col.subtotal" />
                 <TableColumn fx:id="col_aplicaiva" prefWidth="100.00006103515625" text="%fac.col.aplicaiva" visible="false" />
                 <TableColumn fx:id="col_total" prefWidth="125.60001220703123" text="%fac.col.total" visible="false" />
             </columns>

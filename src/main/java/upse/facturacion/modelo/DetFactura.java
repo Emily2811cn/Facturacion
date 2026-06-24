@@ -9,7 +9,7 @@ public class DetFactura {
     private int fac_id;
     private String prod_cod;
     private String prod_nombre;
-    private Float cantidad;      // editable en la tabla
+    private float cantidad;      // editable en la tabla
     private double precio;       // mismo tipo que Productos
     private boolean aplicaIva;
     private double subtotal;     // usar double
@@ -17,7 +17,9 @@ public class DetFactura {
     private double total;        // usar double
 
     public DetFactura() {
-        //this.cantidad=1;
+        this.prod_cod = "";
+        this.cantidad = 1;
+
     }
 
     public DetFactura(int fac_id, String prod_cod, String prod_nombre, Float cantidad, double precio, boolean aplicaIva, double subtotal, double total) {
@@ -29,7 +31,7 @@ public class DetFactura {
         this.aplicaIva = aplicaIva;
         this.subtotal = subtotal;
         this.total = total;
-        
+
     }
 
     public int getFac_id() {
@@ -96,5 +98,18 @@ public class DetFactura {
         this.total = total;
     }
 
+    public void ActualizarTotales() {
+        this.total = cantidad * precio;
+        CalcularIva();
+    }
 
+    public void CalcularIva() {
+        if (this.aplicaIva) {
+            // Si aplica IVA, el total incluye el 15%
+            this.total = this.subtotal + (this.subtotal * 0.15);
+        } else {
+            // Si no aplica IVA, el total es igual al subtotal
+            this.total = this.subtotal;
+        }
+    }
 }

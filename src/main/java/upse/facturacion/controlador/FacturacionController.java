@@ -12,17 +12,25 @@ import javafx.scene.control.TextField;
 import upse.facturacion.modelo.Cliente;
 import upse.facturacion.modelo.DetFactura;
 import java.util.ArrayList;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.util.converter.DoubleStringConverter;
+import javafx.stage.StageStyle;
 import javafx.util.converter.FloatStringConverter;
+import upse.facturacion.MAD.Mad_Clientes;
+import upse.facturacion.MAD.Mad_Productos;
 import upse.facturacion.general.Mod_VariablesGlobales;
 import upse.facturacion.general.Mod_general;
 import static upse.facturacion.general.Mod_general.fun_mensajeError;
@@ -54,7 +62,7 @@ public class FacturacionController implements Initializable {
     @FXML
     private TableColumn<DetFactura, Boolean> col_aplicaiva;
     @FXML
-    private TableColumn<DetFactura, Float> col_total;
+    private TableColumn<DetFactura, Double> col_total;
     // Labels traducibles (los que tienen fx:id en el FXML)
     @FXML
     private Label lbl_facturaTitulo;
@@ -79,7 +87,6 @@ public class FacturacionController implements Initializable {
     @FXML
     private Label lbl_total;
 
-    private ArrayList<DetFactura> detalleFactura = new ArrayList<>();
     private int bandera = 0;
     boolean banderaCliente = false;
     private ObservableList<DetFactura> detallefac = FXCollections.observableArrayList();
@@ -94,12 +101,15 @@ public class FacturacionController implements Initializable {
     private TextField txt_iva;
     @FXML
     private TextField txt_total;
+    @FXML
+    private TableColumn<DetFactura, Void> col_buscar;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        txt_documento.setOnAction(event -> buscarYLlenarCliente());
+
         this.bundle = (rb != null) ? rb : Mod_general.getBundle();
 
-        // Traducir etiquetas
         aplicarIdioma();
 
         txt_numFactura.setText(Mod_VariablesGlobales.generarNumeroFactura());
@@ -110,9 +120,12 @@ public class FacturacionController implements Initializable {
                 buscarYLlenarCliente();
             }
         });
+
+        // Inicializar tabla con una fila vacía
         detallefac.add(new DetFactura(0, "", "", 0f, 0.0, false, 0.0, 0.0));
         tbl_detalle.setItems(detallefac);
 
+        configurarTabla();
     }
 
     private void aplicarIdioma() {
@@ -198,39 +211,63 @@ public class FacturacionController implements Initializable {
 
     private void buscarYLlenarCliente() {
         String cedula = txt_documento.getText().trim();
-        /*Cliente cliente = BD.recuperarCliente(cedula);
+        Mad_Clientes madClientes = new Mad_Clientes();
+        Cliente cliente = madClientes.recuperarClientePorCedula(cedula);
+
         if (cliente != null) {
             bandera = 1;
-            txt_nombres.setText(cliente.getNombres());
-            txt_telefono.setText(cliente.getTelefono());
-            txt_email.setText(cliente.getEmail());
-            txt_direccion.setText(cliente.getDireccion());
+            txt_nombres.setText(cliente.getCli_nombres());
+            txt_telefono.setText(cliente.getCli_telefono());
+            txt_email.setText(cliente.getCli_correo());
+            txt_direccion.setText(cliente.getCli_direccion());
         } else {
             bandera = 0;
             txt_nombres.clear();
             txt_telefono.clear();
             txt_email.clear();
             txt_direccion.clear();
-        }*/
+        }
     }
 
     @FXML
     private void acc_grabar(ActionEvent event) {
         String cedula = txt_documento.getText().trim();
-        //Cliente cliente = BD.recuperarCliente(cedula);
+        Mad_Clientes madClientes = new Mad_Clientes();
+        Cliente cliente = madClientes.recuperarClientePorCedula(cedula);
 
-        /*if (cliente == null) {
-            cliente = new Cliente(cedula, txt_nombres.getText(), txt_telefono.getText(),
-                    txt_email.getText(), txt_direccion.getText());
-            BD.listaClientes.add(cliente);
+        if (cliente == null) {
+            // Crear nuevo cliente
+            cliente = new Cliente(
+                    0, // cli_id → 0 para nuevo
+                    cedula,
+                    txt_nombres.getText(),
+                    "", // apellidos (si no tienes campo)
+                    txt_direccion.getText(),
+                    txt_telefono.getText(),
+                    txt_email.getText(),
+                    "A" // estado activo
+            );
+
+            if (madClientes.mantCliente(cliente)) {
+                Mod_general.fun_mensajeInformacion("Cliente registrado con éxito");
+            } else {
+                Mod_general.fun_mensajeError("Error al registrar cliente");
+                return;
+            }
         } else {
-            cliente.setNombres(txt_nombres.getText());
-            cliente.setTelefono(txt_telefono.getText());
-            cliente.setEmail(txt_email.getText());
-            cliente.setDireccion(txt_direccion.getText());
-        }*/
+            // Actualizar datos si cambiaron
+            cliente.setCli_nombres(txt_nombres.getText());
+            cliente.setCli_direccion(txt_direccion.getText());
+            cliente.setCli_telefono(txt_telefono.getText());
+            cliente.setCli_correo(txt_email.getText());
+            cliente.setCli_estado("A");
+
+            madClientes.mantCliente(cliente);
+        }
+
+        // Aquí ya puedes continuar con la lógica de la factura
         float subtotal = 0, subtotalCero = 0, iva = 0, total = 0;
-        for (DetFactura det : detalleFactura) {
+        for (DetFactura det : detallefac) {
             if (det.isAplicaIva()) {
                 subtotal += det.getTotal();
             } else {
@@ -240,24 +277,24 @@ public class FacturacionController implements Initializable {
         iva = subtotal * 0.12f;
         total = subtotal + subtotalCero + iva;
 
-        CabFactura factura = new CabFactura(
-                0, // fac_id (nuevo, aún sin ID)
-                Integer.parseInt(txt_numFactura.getText()), // numFactura
-                txt_fecha.getText(), // fecha
-                0, // cli_id (puedes asignarlo si lo tienes)
-                cedula, // numdocumento
-                txt_nombres.getText(), // nombres
-                "", // apellidos (no hay campo en la vista)
-                txt_direccion.getText(), // direccion
-                txt_telefono.getText(), // telefono
-                txt_email.getText(), // email
-                detalleFactura, // detallefactura
-                subtotal, subtotalCero, iva, total, // totales
-                "ACTIVA" // estado
-        );
-
-        //BD.guardarFactura(factura);
-        Mod_general.fun_mensajeInformacion(t("msg.factura.guardada", "Factura guardada correctamente"));
+        /* CabFactura factura = new CabFactura(
+                0,
+                Integer.parseInt(txt_numFactura.getText()),
+                txt_fecha.getText(),
+                cliente.getCli_id(), // ✅ ahora guardas el ID real
+                cedula,
+                txt_nombres.getText(),
+                "",
+                txt_direccion.getText(),
+                txt_telefono.getText(),
+                txt_email.getText(),
+                detallefac,
+                subtotal, subtotalCero, iva, total,
+                "ACTIVA"
+        );*/
+        // Aquí llamas a tu método para guardar la factura en BD
+        // madFactura.mantFactura(factura);
+        Mod_general.fun_mensajeInformacion("Factura guardada correctamente");
     }
 
     @FXML
@@ -269,7 +306,7 @@ public class FacturacionController implements Initializable {
         txt_telefono.clear();
         txt_email.clear();
         txt_direccion.clear();
-        detalleFactura.clear();
+        detallefac.clear();
         bandera = 0;
         Mod_general.fun_mensajeInformacion(t("msg.factura.anulada", "Factura anulada."));
     }
@@ -292,7 +329,7 @@ public class FacturacionController implements Initializable {
         txt_telefono.clear();
         txt_email.clear();
         txt_direccion.clear();
-        detalleFactura.clear();
+        detallefac.clear();
 
         String msg = t("msg.factura.nueva", "Nueva factura lista con número: ")
                 + txt_numFactura.getText();
@@ -308,26 +345,156 @@ public class FacturacionController implements Initializable {
     public void configurarTabla() {
         tbl_detalle.setEditable(true);
 
-        col_codigo.setCellValueFactory(new PropertyValueFactory<>("codigo"));
+        col_codigo.setCellValueFactory(new PropertyValueFactory<>("prod_cod"));
         col_descripcion.setCellValueFactory(new PropertyValueFactory<>("prod_nombre"));
         col_cantidad.setCellValueFactory(new PropertyValueFactory<>("cantidad"));
         col_pvp.setCellValueFactory(new PropertyValueFactory<>("precio"));
         col_subtotal.setCellValueFactory(new PropertyValueFactory<>("subtotal"));
         col_aplicaiva.setCellValueFactory(new PropertyValueFactory<>("aplicaIva"));
-        col_total.setCellValueFactory(new PropertyValueFactory<>("total"));
-
-        // Código (String)
+        col_total.setCellValueFactory(cellData -> {
+            DetFactura det = cellData.getValue();
+            double subtotal = det.getSubtotal();
+            double total = det.isAplicaIva() ? subtotal + subtotal * 0.15 : subtotal;
+            return new javafx.beans.property.SimpleDoubleProperty(total).asObject();
+        });
+        // Código editable
         col_codigo.setCellFactory(TextFieldTableCell.forTableColumn());
-        col_codigo.setOnEditCommit(event -> event.getRowValue().setProd_cod(event.getNewValue()));
+        col_codigo.setOnEditCommit(event -> {
+            DetFactura det = event.getRowValue();
+            String nuevoCodigo = event.getNewValue();
+            if (nuevoCodigo == null || nuevoCodigo.trim().isEmpty()) {
+                return;
+            }
 
-        // Descripción (String)
+            det.setProd_cod(nuevoCodigo);
+
+            Mad_Productos madProductos = new Mad_Productos();
+            Productos objProd = madProductos.buscaProductoxCod(nuevoCodigo);
+            if (objProd != null) {
+                det.setProd_nombre(objProd.getProd_nombre());
+                det.setPrecio(objProd.getProd_precioCompra());
+                det.setCantidad(1f);
+                det.setSubtotal(det.getCantidad() * det.getPrecio());
+                det.setTotal(det.getCantidad() * det.getPrecio());
+                det.setAplicaIva(objProd.isProd_aplicaIva());
+                tbl_detalle.refresh();
+                this.agregarFilasiEsUltima(event.getTablePosition().getRow());
+                sumarTotales(); // ✅ recalcula totales generales
+            }
+        });
+
+        // Descripción editable
         col_descripcion.setCellFactory(TextFieldTableCell.forTableColumn());
         col_descripcion.setOnEditCommit(event -> event.getRowValue().setProd_nombre(event.getNewValue()));
 
-        // Cantidad (Float)
+        // Cantidad editable
         col_cantidad.setCellFactory(TextFieldTableCell.forTableColumn(new FloatStringConverter()));
-        col_cantidad.setOnEditCommit(event -> event.getRowValue().setCantidad(event.getNewValue()));
+        col_cantidad.setOnEditCommit(event -> {
+            DetFactura det = event.getRowValue();
+            det.setCantidad(event.getNewValue());
+            det.setSubtotal(det.getCantidad() * det.getPrecio());
+            det.setTotal(det.getCantidad() * det.getPrecio());
+            tbl_detalle.refresh();
+            sumarTotales(); // ✅ recalcula totales generales
+        });
 
+        // 🔹 Columna de acción con botón "Buscar"
+        col_buscar.setCellFactory(columna -> new TableCell<DetFactura, Void>() {
+            private final Button btnBuscar = new Button("Buscar");
+
+            {
+                btnBuscar.setOnAction(evento -> {
+                    DetFactura det = getTableView().getItems().get(getIndex());
+                    abrirBuscarProductos(det);
+                });
+            }
+
+            @Override
+            protected void updateItem(Void item, boolean empty) {
+                super.updateItem(item, empty);
+                setGraphic(empty ? null : btnBuscar);
+            }
+        });
+
+    }
+
+    private void abrirBuscarProductos(DetFactura det) {
+        try {
+            ResourceBundle bundle = Mod_general.getBundle();
+            FXMLLoader loader = new FXMLLoader(
+                    App.class.getResource("/upse/facturacion/vistas/ProductosImagenes.fxml"),
+                    bundle
+            );
+            Parent root = loader.load();
+
+            ProductosImagenesController controlador = loader.getController();
+            Scene scene = new Scene(root);
+            Stage mystage = new Stage();
+            mystage.initModality(Modality.APPLICATION_MODAL);
+            mystage.initStyle(StageStyle.UNDECORATED);
+            mystage.setScene(scene);
+            mystage.setResizable(false);
+            mystage.showAndWait();
+
+            Productos prodSeleccionado = controlador.getProductoSeleccionado();
+            if (prodSeleccionado != null) {
+                det.setProd_cod(prodSeleccionado.getProd_cod());
+                det.setProd_nombre(prodSeleccionado.getProd_nombre());
+                det.setPrecio(prodSeleccionado.getProd_precioCompra());
+                det.setCantidad(1f);
+                det.setAplicaIva(prodSeleccionado.isProd_aplicaIva());
+
+                // ✅ recalcular subtotal y total de la fila
+                det.setSubtotal(det.getCantidad() * det.getPrecio());
+                det.setTotal(det.getCantidad() * det.getPrecio());
+
+                det.ActualizarTotales(); // si tu método ya hace esto, basta con llamarlo aquí
+
+                tbl_detalle.refresh();
+                this.agregarFilasiEsUltima(detallefac.indexOf(det));
+                sumarTotales(); // ✅ ahora sí se llenan los campos de abajo
+            }
+
+        } catch (Exception e) {
+            fun_mensajeError("Error al abrir productos: " + e.getMessage());
+        }
+    }
+
+    private void agregarFilasiEsUltima(int filaActual) {
+        if (filaActual == detallefac.size() - 1) {
+            detallefac.add(new DetFactura());
+            int posNuevaFila = detallefac.size() - 1;
+            Platform.runLater(()
+                    -> this.tbl_detalle.edit(posNuevaFila, col_codigo)
+            );
+        }
+    }
+
+    private void sumarTotales() {
+        double fac_subtotal = 0;
+        double fac_subtotalcero = 0;
+        double fac_iva = 0;
+        double fac_total = 0;
+
+        for (DetFactura objDet : detallefac) {
+            if (objDet == null || objDet.getProd_cod() == null || objDet.getProd_cod().isEmpty()) {
+                continue;
+            }
+            objDet.ActualizarTotales(); // recalcula cada fila
+            if (objDet.isAplicaIva()) {
+                fac_subtotal += objDet.getSubtotal();
+                fac_iva += objDet.getSubtotal() * 0.15;
+            } else {
+                fac_subtotalcero += objDet.getSubtotal();
+            }
+        }
+
+        fac_total = fac_subtotal + fac_subtotalcero + fac_iva;
+
+        txt_subtotal.setText(String.format("%.2f", fac_subtotal));
+        txt_subtotal0.setText(String.format("%.2f", fac_subtotalcero));
+        txt_iva.setText(String.format("%.2f", fac_iva));
+        txt_total.setText(String.format("%.2f", fac_total));
     }
 
 }
