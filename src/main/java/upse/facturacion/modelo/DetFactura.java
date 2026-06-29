@@ -99,8 +99,8 @@ public class DetFactura {
     }
 
     public void ActualizarTotales() {
-        this.total = cantidad * precio;
-        CalcularIva();
+        this.subtotal = this.cantidad * this.precio;
+        this.total = this.subtotal; // o incluir IVA si aplica
     }
 
     public void CalcularIva() {

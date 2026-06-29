@@ -26,7 +26,7 @@ import javafx.scene.control.ToggleGroup;
 import upse.facturacion.MAD.Mad_Productos;
 import upse.facturacion.general.Mod_general;
 import upse.facturacion.modelo.Productos;
-
+import java.text.Normalizer;
 /**
  * FXML Controller class
  *
@@ -95,8 +95,18 @@ public class ProductosImagenesController implements Initializable {
         mostrarProductosFiltrados("");
     }
 
+    private String quitarTildes(String texto) {
+        if (texto == null) {
+            return "";
+        }
+        return Normalizer.normalize(texto, Normalizer.Form.NFD)
+                .replaceAll("\\p{M}", "");
+    }
+
     private void mostrarProductosFiltrados(String filtro) {
         tilepane_prod.getChildren().clear();
+
+        String filtroSinTildes = quitarTildes(filtro.toLowerCase());
 
         for (Productos prod : listaProductos) {
             boolean coincide = false;
@@ -104,9 +114,11 @@ public class ProductosImagenesController implements Initializable {
             if (filtro == null || filtro.isEmpty()) {
                 coincide = true; // mostrar todos
             } else if (rad_codigo.isSelected()) {
-                coincide = prod.getProd_cod().toLowerCase().startsWith(filtro.toLowerCase());
+                coincide = quitarTildes(prod.getProd_cod().toLowerCase())
+                        .startsWith(filtroSinTildes);
             } else if (rad_nombre.isSelected()) {
-                coincide = prod.getProd_nombre().toLowerCase().contains(filtro.toLowerCase());
+                coincide = quitarTildes(prod.getProd_nombre().toLowerCase())
+                        .contains(filtroSinTildes);
             }
 
             if (coincide) {

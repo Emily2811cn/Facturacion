@@ -11,7 +11,7 @@ import java.util.ArrayList;
  */
 public class CabFactura {
     private int fac_id;
-    private int numFactura;
+    private String numFactura;
     private String fecha;
     private int cli_id;
     private String numdocumento;
@@ -31,7 +31,7 @@ public class CabFactura {
     public CabFactura() {
     }
 
-    public CabFactura(int fac_id, int numFactura, String fecha, int cli_id, String numdocumento, String nombres, String apellidos, String direccion, String telefono, String email, ArrayList<DetFactura> detallefactura, float subtotal, float subtotalcero, float iva, float total, String estado) {
+    public CabFactura(int fac_id, String numFactura, String fecha, int cli_id, String numdocumento, String nombres, String apellidos, String direccion, String telefono, String email, ArrayList<DetFactura> detallefactura, float subtotal, float subtotalcero, float iva, float total, String estado) {
         this.fac_id = fac_id;
         this.numFactura = numFactura;
         this.fecha = fecha;
@@ -58,11 +58,11 @@ public class CabFactura {
         this.fac_id = fac_id;
     }
 
-    public int getNumFactura() {
+    public String getNumFactura() {
         return numFactura;
     }
 
-    public void setNumFactura(int numFactura) {
+    public void setNumFactura(String numFactura) {
         this.numFactura = numFactura;
     }
 

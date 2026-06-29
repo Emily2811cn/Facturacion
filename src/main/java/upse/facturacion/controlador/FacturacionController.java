@@ -36,6 +36,13 @@ import upse.facturacion.general.Mod_general;
 import static upse.facturacion.general.Mod_general.fun_mensajeError;
 import upse.facturacion.modelo.CabFactura;
 import upse.facturacion.modelo.Productos;
+import java.io.File;
+import java.io.FileOutputStream;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
+import upse.facturacion.modelo.Cliente;
+import java.util.Locale;
 
 public class FacturacionController implements Initializable {
 
@@ -103,6 +110,8 @@ public class FacturacionController implements Initializable {
     private TextField txt_total;
     @FXML
     private TableColumn<DetFactura, Void> col_buscar;
+    @FXML
+    private Button btn_imprimir;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -277,23 +286,35 @@ public class FacturacionController implements Initializable {
         iva = subtotal * 0.12f;
         total = subtotal + subtotalCero + iva;
 
-        /* CabFactura factura = new CabFactura(
+        CabFactura factura = new CabFactura(
                 0,
-                Integer.parseInt(txt_numFactura.getText()),
+                txt_numFactura.getText(), // ✅ ahora es String
                 txt_fecha.getText(),
-                cliente.getCli_id(), // ✅ ahora guardas el ID real
-                cedula,
+                cliente.getCli_id(),
+                txt_documento.getText(),
                 txt_nombres.getText(),
                 "",
                 txt_direccion.getText(),
                 txt_telefono.getText(),
                 txt_email.getText(),
-                detallefac,
-                subtotal, subtotalCero, iva, total,
+                new ArrayList<>(detallefac),
+                Float.parseFloat(txt_subtotal.getText()),
+                Float.parseFloat(txt_subtotal0.getText()),
+                Float.parseFloat(txt_iva.getText()),
+                Float.parseFloat(txt_total.getText()),
                 "ACTIVA"
-        );*/
-        // Aquí llamas a tu método para guardar la factura en BD
-        // madFactura.mantFactura(factura);
+        );
+
+        // ✅ Generar PDF
+        generarPDF(factura);
+
+        // ✅ Abrir PDF automáticamente
+        try {
+            java.awt.Desktop.getDesktop().open(new File("factura_" + factura.getNumFactura() + ".pdf"));
+        } catch (Exception e) {
+            fun_mensajeError("No se pudo abrir el PDF: " + e.getMessage());
+        }
+
         Mod_general.fun_mensajeInformacion("Factura guardada correctamente");
     }
 
@@ -330,6 +351,12 @@ public class FacturacionController implements Initializable {
         txt_email.clear();
         txt_direccion.clear();
         detallefac.clear();
+
+        // ✅ limpiar también los totales
+        txt_subtotal.clear();
+        txt_subtotal0.clear();
+        txt_iva.clear();
+        txt_total.clear();
 
         String msg = t("msg.factura.nueva", "Nueva factura lista con número: ")
                 + txt_numFactura.getText();
@@ -491,10 +518,83 @@ public class FacturacionController implements Initializable {
 
         fac_total = fac_subtotal + fac_subtotalcero + fac_iva;
 
-        txt_subtotal.setText(String.format("%.2f", fac_subtotal));
-        txt_subtotal0.setText(String.format("%.2f", fac_subtotalcero));
-        txt_iva.setText(String.format("%.2f", fac_iva));
-        txt_total.setText(String.format("%.2f", fac_total));
+        txt_subtotal.setText(String.format(Locale.US, "%.2f", fac_subtotal));
+        txt_subtotal0.setText(String.format(Locale.US, "%.2f", fac_subtotalcero));
+        txt_iva.setText(String.format(Locale.US, "%.2f", fac_iva));
+        txt_total.setText(String.format(Locale.US, "%.2f", fac_total));
+
+    }
+
+    @FXML
+    private void acc_imprimir(ActionEvent event) {
+        try {
+            String cedula = txt_documento.getText().trim();
+            Mad_Clientes madClientes = new Mad_Clientes();
+            Cliente cliente = madClientes.recuperarClientePorCedula(cedula);
+
+            CabFactura factura = new CabFactura(
+                    0,
+                    txt_numFactura.getText(), // ✅ ahora es String
+                    txt_fecha.getText(),
+                    cliente.getCli_id(),
+                    txt_documento.getText(),
+                    txt_nombres.getText(),
+                    "",
+                    txt_direccion.getText(),
+                    txt_telefono.getText(),
+                    txt_email.getText(),
+                    new ArrayList<>(detallefac),
+                    Float.parseFloat(txt_subtotal.getText()),
+                    Float.parseFloat(txt_subtotal0.getText()),
+                    Float.parseFloat(txt_iva.getText()),
+                    Float.parseFloat(txt_total.getText()),
+                    "ACTIVA"
+            );
+
+            generarPDF(factura);
+            java.awt.Desktop.getDesktop().open(new File("factura_" + factura.getNumFactura() + ".pdf"));
+
+        } catch (Exception e) {
+            fun_mensajeError("Error al imprimir factura: " + e.getMessage());
+        }
+    }
+
+    private void generarPDF(CabFactura factura) {
+        Document document = new Document();
+        try {
+            PdfWriter.getInstance(document, new FileOutputStream("factura_" + factura.getNumFactura() + ".pdf"));
+            document.open();
+
+            document.add(new Paragraph("CAFETERÍA OASIS COFFEE"));
+            document.add(new Paragraph("FACTURA #" + factura.getNumFactura()));
+            document.add(new Paragraph("Fecha: " + factura.getFecha()));
+            document.add(new Paragraph("Cliente: " + factura.getNombres()));       // ✅ usa getNombres()
+            document.add(new Paragraph("Cedula: " + factura.getNumdocumento()));  // ✅ usa getNumdocumento()
+            document.add(new Paragraph("Direccion: " + factura.getDireccion()));  // ✅ usa getDireccion()
+            document.add(new Paragraph("Telefono: " + factura.getTelefono()));    // ✅ usa getTelefono()
+            document.add(new Paragraph("Correo: " + factura.getEmail()));         // ✅ usa getEmail()
+            document.add(new Paragraph(" "));
+
+            document.add(new Paragraph("Detalle de productos:"));
+            for (DetFactura det : factura.getDetallefactura()) {                  // ✅ usa getDetallefactura()
+                document.add(new Paragraph(
+                        det.getProd_cod() + " - " + det.getProd_nombre()
+                        + " x" + det.getCantidad()
+                        + " PVP: " + det.getPrecio()
+                        + " Subtotal: " + det.getSubtotal()
+                ));
+            }
+
+            document.add(new Paragraph(" "));
+            document.add(new Paragraph("Subtotal: " + factura.getSubtotal()));
+            document.add(new Paragraph("Subtotal 0%: " + factura.getSubtotalcero()));
+            document.add(new Paragraph("IVA: " + factura.getIva()));
+            document.add(new Paragraph("TOTAL: " + factura.getTotal()));
+
+            document.close();
+        } catch (Exception e) {
+            fun_mensajeError("Error al generar PDF: " + e.getMessage());
+        }
     }
 
 }
