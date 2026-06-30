@@ -1,115 +1,146 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package upse.facturacion.modelo;
 
 public class DetFactura {
 
+    // ── Campos que se guardan en la BD (talleFactura) ──
+    private int det_id;
     private int fac_id;
-    private String prod_cod;
+    private int prod_id;
     private String prod_nombre;
-    private float cantidad;      // editable en la tabla
-    private double precio;       // mismo tipo que Productos
-    private boolean aplicaIva;
-    private double subtotal;     // usar double
+    private float cantidad;
+    private double prod_pvp;   // precio unitario  → columna prod_pvp
+    private double iva;        // valor del IVA    → columna iva
+    private double total;      // total con IVA    → columna total
 
-    private double total;        // usar double
+    // ── Campos extra que usa la UI (no se guardan directamente) ──
+    private String prod_cod;   // código visible en tabla
+    private double subtotal;   // cantidad × prod_pvp (sin IVA)
+    private boolean aplicaIva; // checkbox "APLICA IVA"
 
+    // ── Constructor vacío (para filas nuevas en la tabla) ──
     public DetFactura() {
-        this.prod_cod = "";
-        this.cantidad = 1;
-
+        this.prod_cod    = "";
+        this.prod_nombre = "";
+        this.cantidad    = 0f;
+        this.prod_pvp    = 0.0;
+        this.subtotal    = 0.0;
+        this.iva         = 0.0;
+        this.total       = 0.0;
+        this.aplicaIva   = false;
     }
 
-    public DetFactura(int fac_id, String prod_cod, String prod_nombre, Float cantidad, double precio, boolean aplicaIva, double subtotal, double total) {
-        this.fac_id = fac_id;
-        this.prod_cod = prod_cod;
+    /**
+     * Constructor completo que usa el Controller cuando busca un producto
+     * y lo agrega a la tabla.
+     *
+     * @param det_id      PK (0 si es nuevo)
+     * @param prod_cod    código del producto (UI)
+     * @param prod_nombre nombre del producto
+     * @param cantidad    unidades
+     * @param prod_pvp    precio unitario
+     * @param aplicaIva   si aplica IVA
+     * @param iva         monto IVA calculado
+     * @param total       total final
+     */
+    public DetFactura(int det_id, String prod_cod, String prod_nombre,
+                      float cantidad, double prod_pvp,
+                      boolean aplicaIva, double iva, double total) {
+        this.det_id      = det_id;
+        this.prod_cod    = prod_cod;
         this.prod_nombre = prod_nombre;
+        this.cantidad    = cantidad;
+        this.prod_pvp    = prod_pvp;
+        this.aplicaIva   = aplicaIva;
+        this.subtotal    = cantidad * prod_pvp;
+        this.iva         = iva;
+        this.total       = total;
+    }
+
+    // ── Getters / Setters BD ────────────────────────────────────────────
+
+    public int getDet_id() { return det_id; }
+    public void setDet_id(int det_id) { this.det_id = det_id; }
+
+    public int getFac_id() { return fac_id; }
+    public void setFac_id(int fac_id) { this.fac_id = fac_id; }
+
+    public int getProd_id() { return prod_id; }
+    public void setProd_id(int prod_id) { this.prod_id = prod_id; }
+
+    public String getProd_nombre() { return prod_nombre; }
+    public void setProd_nombre(String prod_nombre) { this.prod_nombre = prod_nombre; }
+
+    public float getCantidad() { return cantidad; }
+    public void setCantidad(float cantidad) {
         this.cantidad = cantidad;
-        this.precio = precio;
-        this.aplicaIva = aplicaIva;
-        this.subtotal = subtotal;
-        this.total = total;
-
+        recalcular();
     }
 
-    public int getFac_id() {
-        return fac_id;
+    /** Precio unitario — columna prod_pvp en la BD */
+    public double getProd_pvp() { return prod_pvp; }
+    public void setProd_pvp(double prod_pvp) {
+        this.prod_pvp = prod_pvp;
+        recalcular();
     }
 
-    public void setFac_id(int fac_id) {
-        this.fac_id = fac_id;
-    }
+    public double getIva() { return iva; }
+    public void setIva(double iva) { this.iva = iva; }
 
-    public String getProd_cod() {
-        return prod_cod;
-    }
+    public double getTotal() { return total; }
+    public void setTotal(double total) { this.total = total; }
 
-    public void setProd_cod(String prod_cod) {
-        this.prod_cod = prod_cod;
-    }
+    // ── Getters / Setters UI ────────────────────────────────────────────
 
-    public String getProd_nombre() {
-        return prod_nombre;
-    }
+    public String getProd_cod() { return prod_cod; }
+    public void setProd_cod(String prod_cod) { this.prod_cod = prod_cod; }
 
-    public void setProd_nombre(String prod_nombre) {
-        this.prod_nombre = prod_nombre;
-    }
+    public double getSubtotal() { return subtotal; }
+    public void setSubtotal(double subtotal) { this.subtotal = subtotal; }
 
-    public Float getCantidad() {
-        return cantidad;
-    }
-
-    public void setCantidad(Float cantidad) {
-        this.cantidad = cantidad;
-    }
-
-    public double getPrecio() {
-        return precio;
-    }
-
-    public void setPrecio(double precio) {
-        this.precio = precio;
-    }
-
-    public boolean isAplicaIva() {
-        return aplicaIva;
-    }
-
+    public boolean isAplicaIva() { return aplicaIva; }
+    public boolean getAplicaIva() { return aplicaIva; }   // PropertyValueFactory necesita getXxx
     public void setAplicaIva(boolean aplicaIva) {
         this.aplicaIva = aplicaIva;
+        recalcular();
     }
 
-    public double getSubtotal() {
-        return subtotal;
+    /**
+     * Alias "precio" → usado por PropertyValueFactory("precio") en col_pvp
+     * y por Mad_factura al leer d.getPrecio().
+     */
+    public double getPrecio() { return prod_pvp; }
+    public void setPrecio(double precio) {
+        this.prod_pvp = precio;
+        recalcular();
     }
 
-    public void setSubtotal(double subtotal) {
-        this.subtotal = subtotal;
-    }
+    // ── Cálculos ────────────────────────────────────────────────────────
 
-    public double getTotal() {
-        return total;
-    }
-
-    public void setTotal(double total) {
-        this.total = total;
-    }
-
-    public void ActualizarTotales() {
-        this.subtotal = this.cantidad * this.precio;
-        this.total = this.subtotal; // o incluir IVA si aplica
-    }
-
-    public void CalcularIva() {
+    /**
+     * Recalcula subtotal, iva y total a partir de cantidad, prod_pvp y aplicaIva.
+     * Llamado automáticamente al cambiar cantidad, precio o aplicaIva.
+     */
+    private void recalcular() {
+        this.subtotal = this.cantidad * this.prod_pvp;
         if (this.aplicaIva) {
-            // Si aplica IVA, el total incluye el 15%
-            this.total = this.subtotal + (this.subtotal * 0.15);
+            this.iva   = this.subtotal * 0.15;
+            this.total = this.subtotal + this.iva;
         } else {
-            // Si no aplica IVA, el total es igual al subtotal
+            this.iva   = 0.0;
             this.total = this.subtotal;
         }
+    }
+
+    /**
+     * Método público para forzar recálculo desde el Controller.
+     * (antes era ActualizarTotales en mayúscula — se mantiene el alias)
+     */
+    public void actualizarTotales() {
+        recalcular();
+    }
+
+    /** Alias con mayúscula para compatibilidad con el Controller existente */
+    public void ActualizarTotales() {
+        recalcular();
     }
 }

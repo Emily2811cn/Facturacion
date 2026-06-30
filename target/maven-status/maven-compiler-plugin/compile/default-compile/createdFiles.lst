@@ -9,6 +9,7 @@ upse\facturacion\modelo\Productos.class
 upse\facturacion\controlador\FacturacionController.class
 upse\facturacion\controlador\ClienteController.class
 upse\facturacion\controlador\LoginController.class
+upse\facturacion\MAD\Mad_factura.class
 upse\facturacion\modelo\Usuario.class
 upse\facturacion\controlador\ProductosImagenesController.class
 upse\facturacion\MAD\Mad_Seguridad.class

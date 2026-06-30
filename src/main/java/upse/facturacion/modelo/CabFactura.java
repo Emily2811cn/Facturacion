@@ -3,8 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package upse.facturacion.modelo;
-import java.util.ArrayList;
-
+import javafx.collections.ObservableList;
+import java.time.LocalDate;
 /**
  *
  * @author EMILY CRUZ
@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class CabFactura {
     private int fac_id;
     private String numFactura;
-    private String fecha;
+    private LocalDate fecha;
     private int cli_id;
     private String numdocumento;
     private String nombres;
@@ -21,7 +21,7 @@ public class CabFactura {
     private String telefono;
     private String email;
     //falta el detalle de la venta 
-    private ArrayList<DetFactura>detallefactura;
+    private ObservableList<DetFactura>detallefactura;
     private float subtotal;
     private float subtotalcero;
     private float iva;
@@ -31,7 +31,7 @@ public class CabFactura {
     public CabFactura() {
     }
 
-    public CabFactura(int fac_id, String numFactura, String fecha, int cli_id, String numdocumento, String nombres, String apellidos, String direccion, String telefono, String email, ArrayList<DetFactura> detallefactura, float subtotal, float subtotalcero, float iva, float total, String estado) {
+    public CabFactura(int fac_id, String numFactura, LocalDate fecha, int cli_id, String numdocumento, String nombres, String apellidos, String direccion, String telefono, String email, ObservableList<DetFactura> detallefactura, float subtotal, float subtotalcero, float iva, float total, String estado) {
         this.fac_id = fac_id;
         this.numFactura = numFactura;
         this.fecha = fecha;
@@ -66,11 +66,11 @@ public class CabFactura {
         this.numFactura = numFactura;
     }
 
-    public String getFecha() {
+    public LocalDate getFecha() {
         return fecha;
     }
 
-    public void setFecha(String fecha) {
+    public void setFecha(LocalDate fecha) {
         this.fecha = fecha;
     }
 
@@ -130,11 +130,11 @@ public class CabFactura {
         this.email = email;
     }
 
-    public ArrayList<DetFactura> getDetallefactura() {
+    public ObservableList<DetFactura> getDetallefactura() {
         return detallefactura;
     }
 
-    public void setDetallefactura(ArrayList<DetFactura> detallefactura) {
+    public void setDetallefactura(ObservableList<DetFactura> detallefactura) {
         this.detallefactura = detallefactura;
     }
 
