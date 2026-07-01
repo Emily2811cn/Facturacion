@@ -270,14 +270,6 @@ public class FacturacionController implements Initializable {
         } else {
             fun_mensajeError("Error al registrar la factura en la BD");
         }
-
-        generarPDF(factura);
-
-        try {
-            java.awt.Desktop.getDesktop().open(new File("factura_" + factura.getNumFactura() + ".pdf"));
-        } catch (Exception e) {
-            fun_mensajeError("No se pudo abrir el PDF: " + e.getMessage());
-        }
     }
 
     @FXML
